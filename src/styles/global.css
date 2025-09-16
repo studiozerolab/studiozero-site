@@ -131,6 +131,52 @@ html { scroll-behavior: smooth; }
     radial-gradient(circle at 12px 12px, rgba(0,0,0,.04) 1px, transparent 1px) 0 0/24px 24px;
 }
 
+/* ------- */
+
+/* Subtle off-silver + CRT vibe for section backgrounds */
+.bg-crt-subtle {
+  position: relative;
+  background: #f6f7f8;                 /* off-silver base (adjust if needed) */
+  border-radius: 16px;                  /* soft card-like edge */
+  overflow: hidden;                     /* contain overlays */
+}
+
+/* stacked overlays: scanlines (under) + faint noise (over) */
+.bg-crt-subtle::before,
+.bg-crt-subtle::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* scanlines (very faint) */
+.bg-crt-subtle::before {
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.04) 0px,
+    rgba(0,0,0,0.04) 1px,
+    transparent 2px,
+    transparent 3px
+  );
+  opacity: .12;
+}
+
+/* noise texture (reuse your site texture) */
+.bg-crt-subtle::after {
+  background-image: url("/textures/noise.png");
+  background-size: auto 340px;
+  background-repeat: repeat;
+  opacity: .10;
+  mix-blend-mode: multiply;             /* keeps type contrast strong */
+}
+
+/* inner padding rhythm so content breathes */
+.section-pad {
+  padding: clamp(2rem, 4vw, 3rem);
+}
+/* -------- */
+
 .texture-bg {
   background-image: url("/textures/noise.png"); /* adjust path */
   background-size: cover;
@@ -158,7 +204,6 @@ html { scroll-behavior: smooth; }
   opacity: .7;
   pointer-events: none;
 }
-
 
 /* CRT scanlines */
 .footer.crt-dark::before {
@@ -192,34 +237,11 @@ html { scroll-behavior: smooth; }
 }
 /* animation: crtFlicker 6s infinite steps(60,end); */
 
-/* ======== */
-
 @keyframes crtFlicker {
   0%, 100% { opacity: .28; }
   48%      { opacity: .33; }
   52%      { opacity: .27; }
 }
-
-/* .footer.crt-dark::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    repeating-linear-gradient(
-      to bottom,
-      rgba(255,255,255,0.05) 0px,
-      rgba(255,255,255,0.05) 1px,
-      transparent 2px,
-      transparent 3px
-    ),
-    url("/textures/noise.png");
-  background-size: auto, 340px 340px; */ /* adjust if your noise tile differs */
-  /*
-  opacity: .18;
-  mix-blend-mode: screen;
-  pointer-events: none;
-  z-index: 0;
-} */
 
 /* layout */
 .footer-inner {
