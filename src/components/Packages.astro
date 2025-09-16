@@ -1,0 +1,140 @@
+---
+const tiers = [
+  {
+    name: "Starter",
+    tag: "1–3 pages",
+    price: 900,
+    blurb:
+      "A clean, fast one-pager or microsite to get you online quickly.",
+    features: [
+      "Custom hero + 1–2 sections",
+      "Mobile-first layout",
+      "Contact form",
+      "Basic SEO & analytics",
+      "2 rounds of edits",
+    ],
+    cta: { label: "Get Starter", href: "#contact" },
+  },
+  {
+    name: "Standard",
+    tag: "5–7 pages",
+    price: 2200,
+    featured: true,
+    blurb:
+      "Polished small-business site with room to grow.",
+    features: [
+      "Home + Services + Work + Contact",
+      "Reusable components",
+      "Performance budget & image optimization",
+      "CMS-ready structure",
+      "3 rounds of edits",
+    ],
+    cta: { label: "Start a Project", href: "#contact" },
+  },
+  {
+    name: "Pro",
+    tag: "custom",
+    price: "Custom",
+    blurb:
+      "Bespoke design, integrations, or migrations.",
+    features: [
+      "Design system & tokens",
+      "Blog/Collections or booking",
+      "3rd-party integrations",
+      "Accessibility pass (WCAG AA)",
+      "Ongoing support options",
+    ],
+    cta: { label: "Book a Call", href: "#contact" },
+  },
+];
+---
+
+<section id="packages" class="bg-white text-zinc-900">
+  <div class="wrap py-16 sm:py-20">
+    <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">Packages</h2>
+    <p class="mt-3 max-w-prose text-zinc-600">
+      Clear, practical options. Every package includes modern performance, responsive design, and friendly support.
+    </p>
+
+    <!-- panel with subtle grid like Services -->
+    <div class="panel-grid rounded-2xl border border-zinc-200 mt-8 p-4 sm:p-6">
+      <div class="grid gap-6 sm:gap-8 lg:grid-cols-3">
+        {tiers.map((t) => (
+          <article
+            class={[
+              "group rounded-xl border transition-shadow",
+              t.featured
+                ? "border-zinc-300 shadow-sm bg-white"
+                : "border-zinc-200 bg-white",
+            ].join(" ")}
+          >
+            <div class="p-6 sm:p-7">
+              <div class="flex items-baseline gap-2">
+                <h3 class="text-xl font-semibold">{t.name}</h3>
+                <span class="text-xs px-2 py-0.5 rounded-full bg-zinc-100 text-zinc-700">
+                  {t.tag}
+                </span>
+              </div>
+
+              <div class="mt-3 flex items-end gap-2">
+                <span class="text-3xl font-extrabold tracking-tight">
+                  {typeof t.price === "number" ? `$${t.price}` : t.price}
+                </span>
+                {typeof t.price === "number" && (
+                  <span class="text-sm text-zinc-500">flat</span>
+                )}
+              </div>
+
+              <p class="mt-3 text-sm text-zinc-600">{t.blurb}</p>
+
+              <ul class="mt-5 space-y-2 text-sm">
+                {t.features.map((f) => (
+                  <li class="flex gap-2">
+                    <svg class="h-4 w-4 mt-0.5 text-emerald-500 shrink-0" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                      <path fill-rule="evenodd" d="M16.704 5.29a1 1 0 0 1 .006 1.414l-7.25 7.3a1 1 0 0 1-1.42.006L3.29 9.26A1 1 0 1 1 4.71 7.84l3.026 3.026 6.535-6.53a1 1 0 0 1 1.414-.006Z" clip-rule="evenodd"/>
+                    </svg>
+                    <span>{f}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <a
+                href={t.cta.href}
+                class={[
+                  "mt-6 inline-flex items-center justify-center rounded-lg px-4 py-2 text-sm font-medium transition",
+                  t.featured
+                    ? "bg-black text-white hover:bg-zinc-900"
+                    : "border border-zinc-300 hover:border-zinc-400 text-zinc-900"
+                ].join(" ")}
+              >
+                {t.cta.label}
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+
+      <!-- small footnote -->
+      <p class="mt-6 text-xs text-zinc-500">
+        Prices are typical starting points and may vary based on scope. Transparent proposals—no surprises.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Reuse your subtle graph paper background */
+  .panel-grid {
+    position: relative;
+    overflow: hidden;
+  }
+  .panel-grid::before {
+    content: "";
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(to bottom, rgba(0,0,0,.03), transparent 60%),
+      url("/textures/grid-8.svg"); /* or keep your existing inline CSS grid if you prefer */
+    opacity: .5;
+    pointer-events: none;
+  }
+</style>
