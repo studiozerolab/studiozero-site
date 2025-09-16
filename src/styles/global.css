@@ -16,7 +16,6 @@ html { scroll-behavior: smooth; }
 @media (min-width: 640px) { .wrap { padding-inline: 2rem; } } */
 
 
-
 .wrap {
     width: min(var(--content-max), calc(100% - (var(--lane) * 2)));
     margin-inline: auto;
@@ -113,8 +112,88 @@ html { scroll-behavior: smooth; }
   -webkit-mask-size:contain;
 }
 
-/* Subtle grid texture background (used on Services) */
 
+/* Reusable section heading */
+.section-heading {
+  /* = Tailwind: text-3xl font-bold uppercase tracking-wide text-zinc-300 */
+  font-size: 1.875rem;      /* 30px */
+  line-height: 2.25rem;     /* 36px */
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;   /* wider tracking */
+  color: #d1d5db;           /* zinc-300 */
+  position: relative;
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  overflow: visible; /* ensure pseudo isnt clipped */
+}
+
+
+/* .section-heading::after {
+  content: "";
+  display: block;
+  height: 2px;
+  width: 4.5rem;
+  margin: 0.35rem auto 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 0, 0, 0.28),
+    transparent
+  );
+  background-size: 200% 100%;
+  animation: shimmer 4.5s linear infinite;
+  opacity: 0.9;
+} */
+
+/* .section-heading::after {
+  height: 4px;
+  width: 6rem;
+  background: linear-gradient(90deg, #ff00aa, #00fff0) !important;
+  opacity: 1 !important;
+  animation: none !important;
+} */
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+/* ============= */
+
+/* headings on light surfaces */
+.section-header {
+  font-size: 1.875rem;      /* 30px */
+  line-height: 2.25rem;     /* 36px */
+  font-weight: 700;
+  text-transform: uppercase;
+
+  font-weight: 800;              /* a hair bolder */
+  letter-spacing: -0.01em;
+  color: #3f3f46;                /* zinc-700: darker, still not black */
+
+  position: relative;
+  display: inline-block;
+  margin-bottom: 1.5rem;
+}
+
+/* if you need a lighter version on dark surfaces (hero/footer) */
+.section-header--on-dark { color: #e5e7eb; } /* gray-200 */
+
+/* ultra subtle depth for headings */
+.section-header.pop {
+  text-shadow:
+    0 1px 0 rgba(255,255,255,.35),  /* slight lift on light bg . dark bg try: rgba(0,0,0,.35) */
+    0 2px 6px rgba(0,0,0,.08);      /* feather glow */
+}
+
+
+/* ============== */
+
+/* Subtle grid texture background (used on Services) */
 .grid-soft {
   background:
     linear-gradient(to right, rgba(17,24,39,0.06) 1px, transparent 1px),
@@ -131,13 +210,56 @@ html { scroll-behavior: smooth; }
     radial-gradient(circle at 12px 12px, rgba(0,0,0,.04) 1px, transparent 1px) 0 0/24px 24px;
 }
 
+/* ServicesPro */
+
+/* Section wrapper spacing is already coming from your layout; bump keeps rhythm */
+.section.bump { padding-block: 3.5rem; }
+
+/* Heading style borrowed from hero silver/grey vibe */
+.heading-heroish {
+  @apply uppercase tracking-[0.15em] text-zinc-300;
+  font-weight: 800;
+  letter-spacing: 0.18em; /* a hair more spacing for presence */
+}
+.heading-rule {
+  height: 1px;
+  margin-top: .6rem;
+  background: linear-gradient(90deg, rgba(255,255,255,.25), rgba(255,255,255,0));
+  opacity: .8;
+}
+
+/* Card depth + faint inner stroke */
+.card { position: relative; border-radius: 14px; }
+.card-stroke { box-shadow: inset 0 0 0 1px rgba(24,24,27,0.08); } /* zinc-900 ~8% */
+
+/* CRT shimmer on icons (subtle, one quick pass on hover) */
+.crt-icon { position: relative; overflow: hidden; }
+.crt-icon::after {
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    repeating-linear-gradient(to bottom,
+      rgba(255,255,255,.18) 0px, rgba(255,255,255,.18) 1px,
+      transparent 1px, transparent 3px);
+  opacity: 0;
+  mix-blend-mode: screen;
+}
+@keyframes scanline {
+  from { transform: translateY(-100%); }
+  to   { transform: translateY(100%); }
+}
+.group:hover .crt-icon::after,
+.group:focus-within .crt-icon::after {
+  opacity: .25;
+  animation: scanline 120ms linear 1;
+}
+
 /* ------- */
 
 /* Subtle off-silver + CRT vibe for section backgrounds */
 .bg-crt-subtle {
-  position: relative;
-  background: #f6f7f8;                 /* off-silver base (adjust if needed) */
-  border-radius: 16px;                  /* soft card-like edge */
+  position: relative;                /* #f6f7f8; off-silver base (adjust if needed) */
+  border-radius: 16px;                  /* 16px soft card-like edge */
   overflow: hidden;                     /* contain overlays */
 }
 
@@ -175,6 +297,19 @@ html { scroll-behavior: smooth; }
 .section-pad {
   padding: clamp(2rem, 4vw, 3rem);
 }
+  /* Tone Variants */
+.bg-crt-light {
+  background: #fafafa; /* airy white-silver */
+}
+
+.bg-crt-mid {
+  background: #f3f3f3; /* balanced gray-silver */
+}
+
+.bg-crt-dark {
+  background: #e9eaec; /* deeper silver/gray */
+}
+
 /* -------- */
 
 .texture-bg {
