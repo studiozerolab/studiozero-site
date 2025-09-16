@@ -1,0 +1,73 @@
+---
+import { navLinks } from "../data/navLinks";
+
+const brand = "Studio Zero";
+const ctaHref = "#contact";
+const ctaText = "Get Started";
+---
+
+<header
+  id="site-header"
+  class="fixed top-0 left-0 right-0 z-50 bg-white"
+> <!--  border-b border-zinc-200 -->
+<div class="wrap bg-transparent">
+  <div class="flex h-14 items-center justify-between">
+    <!-- Logo / Brand -->
+    <a href="/" class="text-lg font-semibold text-zinc-900 hover:text-zinc-600 transition">
+      Studio Zero
+    </a>
+
+    <!-- Navigation -->
+
+    <nav aria-label="Primary">
+      <ul class="hidden sm:flex items-center gap-6">
+        {navLinks.map(({ label, href }) => (
+          <li><a href={href} class="text-sm text-zinc-700 hover:text-black transition">{label}</a></li>
+        ))}
+        <li>
+          <a href="#contact"
+             class="inline-flex items-center rounded-lg border border-zinc-300 px-3 py-1.5 text-sm font-medium text-zinc-900 hover:bg-zinc-50 transition">
+            Get Started
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+
+    <!-- <nav class="flex items-center space-x-6">
+      <a href="#services" class="text-sm font-medium text-zinc-700 hover:text-zinc-900 transition">
+        Services
+      </a>
+      <a href="#work" class="text-sm font-medium text-zinc-700 hover:text-zinc-900 transition">
+        Work
+      </a>
+      <a
+        href="#contact"
+        class="rounded-md border border-zinc-300 bg-white px-3 py-1.5 text-sm font-medium text-zinc-700 shadow-sm hover:bg-zinc-50 hover:text-zinc-900 transition"
+      >
+        Get Started
+      </a>
+    </nav> -->
+  </div>
+  </div>
+</header>
+
+<!-- On-scroll style upgrade -->
+<script is:inline>
+  const header = document.getElementById('site-header');
+  const classy = () => {
+    const scrolled = window.scrollY > 8;
+    header.classList.toggle('shadow', scrolled);
+    const inner = header.firstElementChild;
+    if (!inner) return;
+    if (scrolled) {
+      inner.classList.remove('bg-black/20', 'border-white/5');
+      inner.classList.add('bg-black/70', 'border-white/10');
+    } else {
+      inner.classList.add('bg-black/20', 'border-white/5');
+      inner.classList.remove('bg-black/70', 'border-white/10');
+    }
+  };
+  classy();
+  window.addEventListener('scroll', classy, { passive: true });
+</script>

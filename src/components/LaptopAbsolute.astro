@@ -1,0 +1,45 @@
+---
+/**
+ * Uses the real frame size (2047×1174) and the exact screen rect
+ * from your mask: x=263, y=38, w=1541, h=1000.
+ *
+ * Props:
+ *  - img  (string)  e.g. "/work/willow.jpg"
+ *  - alt  (string)
+ *  - href (string)  optional
+ *  - maxW (string)  Tailwind width class, default max-w-[520px]
+ */
+const { img = '', alt = 'Project screenshot', href = '', maxW = 'max-w-[520px]' } = Astro.props;
+---
+
+<figure class={`relative w-full ${maxW} mx-auto`}>
+  <!-- 1) Keep the frame’s aspect ratio -->
+  <div class="relative w-full aspect-[2047/1174]">
+    <!-- 2) Screenshot positioned exactly where the screen is -->
+    <img
+      src={img}
+      alt={alt}
+      class="absolute object-cover"
+      style="
+        left:12.8481%;
+        top:3.2368%;
+        width:75.2809%;
+        height:85.1789%;
+        border-radius:12px;         /* adjust to match bezel radius */
+      "
+      loading="lazy"
+      decoding="async"
+    />
+
+    <!-- 3) Frame image on top -->
+    <img
+      src="/laptop-frame.png"
+      alt=""
+      class="absolute inset-0 w-full h-full pointer-events-none select-none"
+      loading="lazy"
+      decoding="async"
+    />
+  </div>
+
+  {href && <a href={href} class="absolute inset-0" aria-label={alt}></a>}
+</figure>

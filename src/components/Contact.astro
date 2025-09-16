@@ -1,0 +1,70 @@
+---
+/**
+ * Contact.astro
+ * Contact section with subtle textured background
+ */
+---
+
+<section id="contact" class="wrap my-24 relative panel-grid py-16 rounded-xl">
+  <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-center mb-6">
+    Let’s Work Together
+  </h2>
+  <p class="text-center text-zinc-600 max-w-2xl mx-auto mb-10">
+    Have a project in mind? Whether you need a fresh website or a small update,
+    I’d love to hear from you. Fill out the form or reach out directly.
+  </p>
+
+  <form
+    class="max-w-xl mx-auto grid gap-6"
+    name="contact"
+    method="POST"
+    data-netlify="true"
+  >
+    <input type="hidden" name="form-name" value="contact" />
+
+    <div>
+      <label for="name" class="block text-sm font-medium text-zinc-700">Name</label>
+      <input
+        type="text"
+        name="name"
+        id="name"
+        required
+        class="mt-1 w-full rounded-md border border-zinc-300 px-3 py-2 shadow-sm focus:border-black focus:ring-black"
+      />
+    </div>
+
+    <div>
+      <label for="email" class="block text-sm font-medium text-zinc-700">Email</label>
+      <input
+        type="email"
+        name="email"
+        id="email"
+        required
+        class="mt-1 w-full rounded-md border border-zinc-300 px-3 py-2 shadow-sm focus:border-black focus:ring-black"
+      />
+    </div>
+
+    <div>
+      <label for="message" class="block text-sm font-medium text-zinc-700">Message</label>
+      <textarea
+        name="message"
+        id="message"
+        rows="5"
+        required
+        class="mt-1 w-full rounded-md border border-zinc-300 px-3 py-2 shadow-sm focus:border-black focus:ring-black"
+      ></textarea>
+    </div>
+
+    <button
+      type="submit"
+      class="w-full rounded-md bg-black px-4 py-2 text-white font-semibold shadow hover:bg-zinc-800 transition"
+    >
+      Send Message
+    </button>
+  </form>
+
+  <div class="text-center mt-10 text-sm text-zinc-500">
+    Or email me directly at
+    <a href="mailto:hello@studiozero.com" class="underline">hello@studiozero.com</a>
+  </div>
+</section>

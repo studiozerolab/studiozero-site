@@ -1,0 +1,39 @@
+---
+import { navLinks } from "../data/navLinks";
+const YEAR = new Date().getFullYear();
+---
+
+<footer class="border-t border-zinc-200 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/70">
+  <div class="wrap py-8 flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+    <div class="flex items-center gap-3">
+      <span class="text-base font-semibold tracking-tight">Studio Zero</span>
+      <span aria-hidden="true" class="text-zinc-300">•</span>
+      <span class="text-sm text-zinc-500">From Zero to One</span>
+    </div>
+
+    <nav class="text-sm">
+      <ul class="flex flex-wrap items-center gap-x-6 gap-y-3">
+        {navLinks.map(({ label, href }) => (
+          <li><a href={href} class="text-zinc-700 hover:text-black transition">{label}</a></li>
+        ))}
+        <li>
+          <a href="#contact"
+             class="inline-flex items-center rounded-lg border border-zinc-300 px-3 py-1.5 text-zinc-900 font-medium hover:bg-zinc-50 transition">
+            Get Started
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="border-t border-zinc-200">
+    <div class="wrap py-6 flex flex-col-reverse items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <p class="text-xs text-zinc-500">© {YEAR} Studio Zero. All rights reserved.</p>
+      <div class="flex items-center gap-4 text-sm">
+        <a href="https://github.com/" class="text-zinc-600 hover:text-black transition">GitHub</a>
+        <a href="https://www.linkedin.com/" class="text-zinc-600 hover:text-black transition">LinkedIn</a>
+        <a href="https://www.instagram.com/" class="text-zinc-600 hover:text-black transition">Instagram</a>
+      </div>
+    </div>
+  </div>
+</footer>

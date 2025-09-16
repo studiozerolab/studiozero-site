@@ -1,0 +1,28 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+
+const {
+  title = 'Studio Zero',
+  description = 'From Zero to One — where ideas go live',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+  </head>
+  <body class="min-h-screen bg-white text-zinc-200 antialiased selection:bg-emerald-300/30">
+    <Header />
+    <div class="h-14" aria-hidden="true"></div> <!-- spacer equal to header height -->
+
+    <main>
+      <slot />
+    </main>
+
+  </body>
+</html>

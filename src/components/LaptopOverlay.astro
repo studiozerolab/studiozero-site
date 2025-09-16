@@ -1,0 +1,46 @@
+---
+/**
+ * LaptopOverlay.astro
+ * Props:
+ *  - img   (string)  screenshot path, e.g. "/work/willow.jpg"
+ *  - alt   (string)  alt text for the screenshot
+ *  - href  (string)  optional link to the project
+ *  - maxW  (string)  optional Tailwind width (default max-w-[520px])
+ */
+const {
+  img = '',
+  alt = 'Project screenshot',
+  href = '',
+  maxW = 'max-w-[520px]',
+} = Astro.props;
+---
+
+<figure class={`relative w-full ${maxW} mx-auto`}>
+  <!-- Screenshot (masked to screen area) -->
+  <img
+    src={img}
+    alt={alt}
+    class="screen-mask"
+  />
+
+  <!-- Laptop frame on top -->
+   <img src="/laptop-frame.png" alt="" class="relative z-10 h-auto w-full pointer-events-none select-none" />
+  <!-- <img
+    src="/laptop-frame.png"
+    alt=""
+    class="relative z-10 h-auto w-full pointer-events-none select-none"
+    
+  />--> <!-- loading="lazy" decoding="async" -->
+
+  {href && (
+    <a href={href} class="absolute inset-0 z-20 rounded-lg"
+       aria-label={alt}></a>
+  )}
+</figure>
+
+<style is:global>
+  /* Fallback if CSS masks aren’t supported (older browsers) */
+  @supports not (mask-image: linear-gradient(#000,#000)) {
+    figure > img[style], figure > img[class*="mask-image"] { display:none; }
+  }
+</style>

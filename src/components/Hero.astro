@@ -1,0 +1,44 @@
+---
+const TAGLINE = 'From Zero to One — where ideas go live';
+---
+
+<!-- <section class="relative min-h-[75vh] flex flex-col justify-center items-center text-center bg-white"> -->
+ <section class="relative bg-white">
+  <div class="wrap  rounded-2x1">
+    <div class="rounded-b-lg  relative min-h-[75vh] flex flex-col justify-center items-center text-center bg-black hero-texture py-20"> <!-- py-20 -->
+    <h1 class="font-extrabold uppercase tracking-tight leading-tight text-zinc-300">
+      <span class="block text-5xl sm:text-6xl md:text-7xl">Studio</span>
+      <span class="block text-5xl sm:text-6xl md:text-7xl relative -mt-2">
+        Zero
+        <span
+          aria-hidden="true"
+          class="block mx-auto mt-0.5 leading-none select-none text-zinc-200 text-7xl md:text-8xl font-bold">
+          ø
+        </span>
+      </span>
+    </h1>
+
+    <p class="mx-auto mt-6 max-w-2xl text-base sm:text-lg text-zinc-400">
+      {TAGLINE}
+    </p>
+  
+  <!-- </div> -->
+
+  <!-- Minimal scroll arrow -->
+  <a
+    href="#services"
+    class="absolute bottom-6 inline-flex flex-col items-center text-zinc-400 hover:text-zinc-200 transition-colors">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+    </svg>
+    <span class="sr-only">Scroll to services</span>
+  </a>
+  </div>
+  </div>
+  <!-- Extension band: continues the black block below the hero -->
+  <!-- <div 
+    aria-hidden="true"
+    class="pointer-events-none absolute bottom-0 left-1/2 -translate-x-1/2 h-24 bg-black"
+    style="width: min(var(--content-max), calc(100% - (var(--lane) * 2)));">
+  </div> -->
+</section>

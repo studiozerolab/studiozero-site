@@ -1,0 +1,139 @@
+@import "tailwindcss";
+
+/* Optional: nice text smoothing on dark bg */
+html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+/* Smooth scroll + shared side gutters */
+html { scroll-behavior: smooth; }
+/* .wrap { @apply mx-auto max-w-6xl px-6; } */
+
+:root {
+    --lane: clamp(16px, 4vw, 32px); /* lane = side margin; scales a bit with viewport */
+    --content-max: 1100px; /* adjust to taste */
+}
+
+/* .wrap { max-width: 72rem; margin-inline: auto; padding-inline: 1.5rem; }
+@media (min-width: 640px) { .wrap { padding-inline: 2rem; } } */
+
+
+
+.wrap {
+    width: min(var(--content-max), calc(100% - (var(--lane) * 2)));
+    margin-inline: auto;
+
+    /* padding-inline: 1.5rem; */
+
+    /* background: rgba(255, 0, 0, 0.1);
+    max-width: 90rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem; */
+}
+
+/* body { outline: 3px solid magenta !important;} */
+
+/* Subtle hero texture: vignette + very faint scanlines */
+/* Subtle hero texture: vignette + scanlines + tiny grain */
+.hero-texture { position: relative; overflow: hidden; }
+
+/* Main vignette + scanlines (no blend modes, plainly visible) */
+.hero-texture::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  /* Layer 1: soft radial vignette in the upper area */
+  background:
+    radial-gradient(60% 60% at 50% 35%, rgba(255,255,255,0.14), transparent 60%),
+    /* Layer 2: faint horizontal scanlines */
+    repeating-linear-gradient(
+      to bottom,
+      rgba(255,255,255,0.06) 0px,
+      rgba(255,255,255,0.06) 1px,
+      transparent 2px,
+      transparent 4px
+    );
+  opacity: .42;          /* <- adjust 0.30–0.50 */
+  z-index: 0;
+}
+
+/* Tiny grain on top */
+.hero-texture::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    repeating-conic-gradient(from 0deg, rgba(255,255,255,0.08) 0% 1%, transparent 1% 2%);
+  background-size:6px 6px;
+  opacity:.04;           /* <- adjust .02–.06 */
+  z-index: 0;
+}
+
+/* Clip an element to the laptop screen shape */
+.screen-mask {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  /* CSS Mask (Chromium/Firefox) */
+  mask-image: url('/screen-mask-full.png');
+  mask-repeat: no-repeat;
+  mask-position: center;
+  mask-size: contain;
+
+  /* Safari */
+  -webkit-mask-image: url('/screen-mask-full.png');
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  -webkit-mask-size: contain;
+}
+
+/* Mask a background to the exact laptop screen shape */
+.screen-mask-bg {
+  position:absolute;
+  inset:0;
+  background-position:center;
+  background-size:cover;
+  background-repeat:no-repeat;
+
+  /* Standard mask */
+  mask-image:url('/screen-mask-full.png');
+  mask-repeat:no-repeat;
+  mask-position:center;
+  mask-size:contain;
+
+  /* Safari/WebKit */
+  -webkit-mask-image:url('/screen-mask-full.png');
+  -webkit-mask-repeat:no-repeat;
+  -webkit-mask-position:center;
+  -webkit-mask-size:contain;
+}
+
+/* Subtle grid texture background (used on Services) */
+
+.grid-soft {
+  background:
+    linear-gradient(to right, rgba(17,24,39,0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(17,24,39,0.06) 1px, transparent 1px);
+  background-size: 24px 24px; /* grid spacing */
+}
+
+/* Soft grid panel used behind the cards/screenshots */
+.panel-grid {
+  position: relative;
+  background:
+    /* light dot grid */
+    radial-gradient(circle at 1px 1px, rgba(0,0,0,.08) 1px, transparent 1px) 0 0/24px 24px,
+    radial-gradient(circle at 12px 12px, rgba(0,0,0,.04) 1px, transparent 1px) 0 0/24px 24px;
+}
+
+.texture-bg {
+  background-image: url("/textures/noise.png"); /* adjust path */
+  background-size: cover;
+  background-repeat: repeat;
+  background-position: center;
+}

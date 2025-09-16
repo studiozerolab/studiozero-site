@@ -1,0 +1,61 @@
+---
+/**
+ * LaptopAutoFit.astro
+ * Auto-fits a screenshot into your laptop-frame.png’s screen rectangle.
+ * Uses your measured frame/screen values (from your file).
+ */
+
+interface Props {
+  src: string;                 // screenshot (e.g. "/work/willow.jpg")
+  frame?: string;              // frame path (default: "/mockups/laptop-frame.png")
+  class?: string;              // width control from parent, e.g. "w-full max-w-[520px] mx-auto"
+  fit?: "cover" | "contain";   // how the screenshot scales (default "cover")
+  radius?: string;             // screen corner radius (CSS), e.g. "10px"
+}
+
+const {
+  src,
+  frame = "/laptop-frame.png",
+  class: className = "",
+  fit = "cover",
+  radius = "0px",
+} = Astro.props;
+/* radius = "10px",       */
+
+/* From your measured file */
+const FRAME_W = 1600;
+const FRAME_H = 1200;
+
+/* Screen rect as % (derived from 408,317,793,515) */
+const leftPct   = 25.5;
+const topPct    = 26.4167;
+const widthPct  = 49.5625;
+const heightPct = 42.9167;
+
+const screenStyle =
+  `left:${leftPct}%; top:${topPct}%; width:${widthPct}%; height:${heightPct}%; ` +
+  `object-fit:${fit}; border-radius:${radius};`;
+---
+
+<!-- Aspect-ratio wrapper keeps the correct height at any width -->
+<div class={`relative ${className}`} style={`aspect-ratio:${FRAME_W}/${FRAME_H};`}>
+  <!-- Screenshot: positioned exactly in the screen rectangle -->
+  <img
+    src={src}
+    alt=""
+    class="absolute"
+    style={screenStyle}
+    loading="lazy"
+    decoding="async"
+    onerror="this.style.display='none'"
+  />
+
+  <!-- Laptop frame on top -->
+  <img
+    src={frame}
+    alt="Laptop frame"
+    class="absolute inset-0 w-full h-full pointer-events-none select-none"
+    loading="lazy"
+    decoding="async"
+  />
+</div>

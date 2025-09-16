@@ -1,0 +1,23 @@
+---
+import LaptopAutoFit from "./LaptopAutoFit.astro";
+
+const items = [
+  { title: "Willow Wellness Site", desc: "Simple, modern design that's easy to update", img: "/work/willow.jpg" },
+  { title: "Vertex Brewery Website", desc: "Custom website showcasing brewery offerings", img: "/work/vertex.jpg" },
+  { title: "Jensen Carpentry Page", desc: "Informative, professional landing page", img: "/work/jensen.jpg" },
+];
+---
+
+<section id="work" class="wrap my-24">
+  <h2 class="text-3xl sm:text-4xl font-bold tracking-tight mb-8">Recent Work</h2>
+
+  <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+    {items.map((it) => (
+      <article class="group rounded-xl border border-zinc-200 bg-white p-5 shadow-sm hover:shadow-md transition">
+        <LaptopAutoFit src={it.img} class="w-full max-w-520px mx-auto scale-125" />
+        <h3 class="mt-4 text-lg font-semibold text-zinc-900">{it.title}</h3>
+        <p class="mt-1 text-sm text-zinc-600">{it.desc}</p>
+      </article>
+    ))}
+  </div>
+</section>
