@@ -38,7 +38,7 @@ const screenStyle =
 ---
 
 <!-- Aspect-ratio wrapper keeps the correct height at any width -->
-<div class={`relative ${className}`} style={`aspect-ratio:${FRAME_W}/${FRAME_H};`}>
+<div class={`relative ${className} z-20 bg-transparent`} style={`aspect-ratio:${FRAME_W}/${FRAME_H};`}>
   <!-- Screenshot: positioned exactly in the screen rectangle -->
   <img
     src={src}
@@ -54,7 +54,7 @@ const screenStyle =
   <img
     src={frame}
     alt="Laptop frame"
-    class="absolute inset-0 w-full h-full pointer-events-none select-none"
+    class="absolute inset-0 w-full h-full pointer-events-none select-none z-10"
     loading="lazy"
     decoding="async"
   />

@@ -5,12 +5,12 @@
  */
 ---
 
-<!-- wrap my-24 relative panel-grid py-16 rounded-xl -->
-<section id="contact" class="wrap bg-crt-subtle bg-crt-light section-pad">
-  <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-center mb-6">
+<section id="contact" class="wrap bg-crt-subtle flat-bottom bg-crt-light section-pad">
+  <div class="wrap">
+  <h2 class="section-header pop">     <!-- text-3xl sm:text-4xl font-bold tracking-tight text-center mb-6 -->
     Let’s Work Together
   </h2>
-  <p class="text-center text-zinc-600 max-w-2xl mx-auto mb-10">
+  <p class="section-descrip"> <!-- text-center text-zinc-600 max-w-2xl mx-auto mb-10 -->
     Have a project in mind? Whether you need a fresh website or a small update,
     I’d love to hear from you. Fill out the form or reach out directly.
   </p>
@@ -30,7 +30,7 @@
         name="name"
         id="name"
         required
-        class="mt-1 w-full rounded-md border border-zinc-300 px-3 py-2 shadow-sm focus:border-black focus:ring-black"
+        class="no-crt bg-clear mt-1 w-full rounded-md border border-zinc-300 px-3 py-2 shadow-sm focus:border-black focus:ring-black"
       />
     </div>
 
@@ -41,7 +41,7 @@
         name="email"
         id="email"
         required
-        class="mt-1 w-full rounded-md border border-zinc-300 px-3 py-2 shadow-sm focus:border-black focus:ring-black"
+        class="no-crt mt-1 w-full rounded-md border border-zinc-300 px-3 py-2 shadow-sm focus:border-black focus:ring-black"
       />
     </div>
 
@@ -52,7 +52,7 @@
         id="message"
         rows="5"
         required
-        class="mt-1 w-full rounded-md border border-zinc-300 px-3 py-2 shadow-sm focus:border-black focus:ring-black"
+        class="no-crt mt-1 w-full rounded-md border border-zinc-300 px-3 py-2 shadow-sm focus:border-black focus:ring-black"
       ></textarea>
     </div>
 
@@ -67,5 +67,6 @@
   <div class="text-center mt-10 text-sm text-zinc-500">
     Or email me directly at
     <a href="mailto:hello@studiozero.com" class="underline">hello@studiozero.com</a>
+  </div>
   </div>
 </section>

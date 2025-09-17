@@ -30,11 +30,22 @@ html { scroll-behavior: smooth; }
     padding-right: 1.5rem; */
 }
 
+.flat-bottom {
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+
 /* body { outline: 3px solid magenta !important;} */
 
 /* Subtle hero texture: vignette + very faint scanlines */
 /* Subtle hero texture: vignette + scanlines + tiny grain */
-.hero-texture { position: relative; overflow: hidden; }
+.hero-texture { 
+  position: relative; 
+  overflow: hidden; 
+  border-radius: 16px;
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+}
 
 /* Main vignette + scanlines (no blend modes, plainly visible) */
 .hero-texture::before{
@@ -221,12 +232,6 @@ html { scroll-behavior: smooth; }
   font-weight: 800;
   letter-spacing: 0.18em; /* a hair more spacing for presence */
 }
-.heading-rule {
-  height: 1px;
-  margin-top: .6rem;
-  background: linear-gradient(90deg, rgba(255,255,255,.25), rgba(255,255,255,0));
-  opacity: .8;
-}
 
 /* Card depth + faint inner stroke */
 .card { position: relative; border-radius: 14px; }
@@ -256,47 +261,8 @@ html { scroll-behavior: smooth; }
 
 /* ------- */
 
-/* Subtle off-silver + CRT vibe for section backgrounds */
-.bg-crt-subtle {
-  position: relative;                /* #f6f7f8; off-silver base (adjust if needed) */
-  border-radius: 16px;                  /* 16px soft card-like edge */
-  overflow: hidden;                     /* contain overlays */
-}
 
-/* stacked overlays: scanlines (under) + faint noise (over) */
-.bg-crt-subtle::before,
-.bg-crt-subtle::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
 
-/* scanlines (very faint) */
-.bg-crt-subtle::before {
-  background: repeating-linear-gradient(
-    to bottom,
-    rgba(0,0,0,0.04) 0px,
-    rgba(0,0,0,0.04) 1px,
-    transparent 2px,
-    transparent 3px
-  );
-  opacity: .12;
-}
-
-/* noise texture (reuse your site texture) */
-.bg-crt-subtle::after {
-  background-image: url("/textures/noise.png");
-  background-size: auto 340px;
-  background-repeat: repeat;
-  opacity: .10;
-  mix-blend-mode: multiply;             /* keeps type contrast strong */
-}
-
-/* inner padding rhythm so content breathes */
-.section-pad {
-  padding: clamp(2rem, 4vw, 3rem);
-}
   /* Tone Variants */
 .bg-crt-light {
   background: #fafafa; /* airy white-silver */
@@ -463,3 +429,162 @@ html { scroll-behavior: smooth; }
   .footer-nav { order: 3; }
   .footer-socials { order: 2; }
 }
+
+
+
+
+/* ---------- Section system (shared) ---------- */
+
+/* consistent outer spacing between sections */
+.section-gap { margin-block: clamp(2.5rem, 5vw, 4rem); }  /* margin-block: clamp(3rem, 6vw, 6rem); */
+
+/* inner padding rhythm for textured sections */
+.section-pad { padding: clamp(1.5rem, 3vw, 2.25rem); }  /* padding: clamp(2rem, 4vw, 3rem); */
+
+/* default section header (you already use .section-header pop) */
+.heading-rule {
+  height: 2px; /* 1px */
+  width: 56px; /* new */
+  margin-top: .6rem; /* */
+  background: rgba(0,0,0,.12); /* background: linear-gradient(90deg, rgba(255,255,255,.25), rgba(255,255,255,0)); */
+  border-radius: 2px; /* new */
+  /* opacity: .8; */
+}
+.section-descrip {
+  max-width: 65ch;
+  margin-block: .5rem 2rem;
+  font-size: clamp(0.975rem, 1.2vw, 1.0625rem); /* !15.6px-17px */
+  line-height: 1.6;
+  letter-spacing: 0.005em;
+  color: rgb(82 82 91);
+}
+.section-descrip.on-dark {
+  color: rgb(212, 212, 216);
+  opacity: .9;
+}
+
+/* standard grid used in Services / Packages / Work */
+.std-grid {
+  display: grid;
+  gap: 2rem;
+}
+@media (min-width: 640px){ .std-grid { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media (min-width:1024px){ .std-grid { grid-template-columns: repeat(3, minmax(0,1fr)); } }
+
+/* consistent card “panel” */
+.panel {
+  background: #fff;
+  border: 1px solid rgb(228 228 231);   /* zinc-200-ish */
+  border-radius: 16px;
+  padding: 1.25rem;
+  box-shadow: 0 2px 8px rgb(0 0 0 / .04);
+}
+.panel.hoverable {
+  transition: box-shadow .25s ease, transform .25s ease;
+}
+.panel.hoverable:hover {
+  box-shadow: 0 10px 28px rgb(0 0 0 / .10);
+  transform: translateY(-2px);
+}
+
+/* subtle CRT overlay for cards (matches your section texture) */
+.panel.crt::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(0,0,0,.035) 0px,
+      rgba(0,0,0,.035) 1px,
+      transparent 2px,
+      transparent 3px
+    );
+  opacity: .15;
+  mix-blend-mode: multiply;
+  border-radius: inherit;
+}
+.panel.crt { position: relative; overflow: hidden; }
+
+
+/* Subtle off-silver + CRT vibe for section backgrounds */
+.bg-crt-subtle {
+  position: relative;                /* #f6f7f8; off-silver base (adjust if needed) */
+  border-radius: 16px;                  /* 16px soft card-like edge */
+  overflow: hidden;                     /* contain overlays */
+  z-index: 0;
+}
+/* optional to add texture over content */
+.bg-crt-subtle.crt-over::before,
+.bg-crt-subtle.crt-over::after {
+  z-index: 2;
+}
+
+/* stacked overlays: scanlines (under) + faint noise (over) */
+.bg-crt-subtle::before,
+.bg-crt-subtle::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* scanlines (very faint) */
+.bg-crt-subtle::before {
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.04) 0px,
+    rgba(0,0,0,0.04) 1px,
+    transparent 2px,
+    transparent 3px
+  );
+  opacity: .12;
+}
+
+/* noise texture (reuse your site texture) */
+.bg-crt-subtle::after {
+  background-image: url("/textures/noise.png");
+  background-size: auto 340px;
+  background-repeat: repeat;
+  opacity: .10;
+  mix-blend-mode: multiply;             /* keeps type contrast strong */
+}
+
+.no-crt {
+  position: relative;
+  z-index: 10;
+  background: #fff;  /* match the section: var(--section-base, #f6f7f8) */
+}
+.laptop-clean {
+  position: relative;
+  z-index: 10;
+  background: #fff;
+  border-radius: inherit;
+}
+.bg-clear::before,
+.bg-clear::after {
+  content: none !important;
+  background: none !important;
+}
+/*
+<section id="services" class="wrap section-gap bg-crt-subtle bg-crt-light section-pad">
+  <div class="wrap">
+
+  <header class="mb-8">
+      <h2 class="section-header pop">Services</h2>
+      <div class="heading-rule"></div>
+    </header>
+
+    <div class="std-grid">
+
+  --
+
+<section id="services" class="wrap section-gap bg-crt-subtle bg-crt-light section-pad"> <!-- py-20 bg-white  -->
+  <div class="max-w-6xl mx-auto px-6">
+
+  <header class="mb-8">
+      <h2 class="section-header pop">Services</h2>
+
+      <div class="grid gap-8 md:grid-cols-3">
+*/
