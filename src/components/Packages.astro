@@ -69,9 +69,9 @@ const tiers = [
             ].join(" ")}
           >
             <div class="p-6 sm:p-7">
-              <div class="flex items-baseline gap-2">
-                <h3 class="text-xl font-bold text-gray-900">{t.name}</h3>
-                <span class="text-xs px-2 py-0.5 rounded-full bg-zinc-100 text-zinc-700">
+              <div class="flex items-center gap-2"> {/* items-baseline */}
+                <h3 class="text-xl font-bold text-gray-900 leading-tight">{t.name}</h3>
+                <span class="inline-flex items-center whitespace-nowrap text-xs px-2 py-0.5 rounded-full bg-zinc-100 text-zinc-700 leading-none">
                   {t.tag}
                 </span>
               </div>
