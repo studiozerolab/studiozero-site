@@ -3,9 +3,13 @@ const TAGLINE = 'From Zero to One — where ideas go live';
 ---
 
 <!-- <section class="relative min-h-[75vh] flex flex-col justify-center items-center text-center bg-white"> -->
- <section class="relative bg-white">
-  <div class="wrap"> <!-- rounded-2x1  v rounded-b-lg-->
-    <div class="relative min-h-[75vh] flex flex-col justify-center items-center text-center bg-black hero-texture py-20"> <!-- py-20 -->
+ <section class="relative bg-white"> <!-- relative bg-white crt-band  -->
+  <span class="noise-seq noise-single" style="animation-delay: 0s;"></span>
+  <span class="noise-seq noise-double" style="animation-delay: 1.4s;"></span>
+
+  <div class="wrap flat-top crt-band"> <!-- rounded-2x1  v rounded-b-lg-->
+
+    <div class="relative min-h-[75vh] flex flex-col justify-center items-center text-center bg-black py-20"> <!-- hero-texture py-20 -->
     <h1 class="font-extrabold uppercase tracking-tight leading-tight text-zinc-400">
       <span class="block text-5xl sm:text-6xl md:text-7xl">Studio</span>
       <span class="block text-5xl sm:text-6xl md:text-7xl relative -mt-2">
@@ -19,8 +23,20 @@ const TAGLINE = 'From Zero to One — where ideas go live';
     </h1>
 
     <p class="mx-auto mt-6 max-w-2xl text-base sm:text-lg text-zinc-400">
+  <span
+    class="typewriter"
+    data-text="From Zero to One — where ideas go live"
+    id="tagline-typer"
+    aria-live="polite"
+  >
+    <span class="tw-text"></span><span class="tw-caret" aria-hidden="true"></span>
+  </span>
+</p>
+
+
+    <!-- <p class="mx-auto mt-6 max-w-2xl text-base sm:text-lg text-zinc-400">
       {TAGLINE}
-    </p>
+    </p> -->
   
   <!-- </div> -->
 
@@ -42,3 +58,38 @@ const TAGLINE = 'From Zero to One — where ideas go live';
     style="width: min(var(--content-max), calc(100% - (var(--lane) * 2)));">
   </div> -->
 </section>
+
+<script>
+  // Config — tweak as you like
+  const SPEED_MS = 45;       // 28 time per character
+  const START_DELAY = 500;   // 250 delay before typing starts
+  const KEEP_CARET = true;   // caret stays after finishing
+
+  const el = document.getElementById('tagline-typer');
+  if (el) {
+    const txtEl = el.querySelector('.tw-text');
+    const caretEl = el.querySelector('.tw-caret');
+    const full = el.getAttribute('data-text') || '';
+
+    // Reduced motion? Show instantly.
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) {
+      txtEl.textContent = full;
+      el.dataset.ready = 'true';
+    } else {
+      let i = 0;
+      el.dataset.ready = 'true';
+      setTimeout(() => {
+        const step = () => {
+          if (i <= full.length) {
+            txtEl.textContent = full.slice(0, i++);
+            requestAnimationFrame(() => setTimeout(step, SPEED_MS));
+          } else if (!KEEP_CARET && caretEl) {
+            caretEl.remove();
+          }
+        };
+        step();
+      }, START_DELAY);
+    }
+  }
+</script>

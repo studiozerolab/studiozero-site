@@ -19,7 +19,7 @@ html { scroll-behavior: smooth; }
 .wrap {
     width: min(var(--content-max), calc(100% - (var(--lane) * 2)));
     margin-inline: auto;
-
+    border-radius: 16px;
     /* padding-inline: 1.5rem; */
 
     /* background: rgba(255, 0, 0, 0.1);
@@ -30,6 +30,10 @@ html { scroll-behavior: smooth; }
     padding-right: 1.5rem; */
 }
 
+.flat-top {
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+}
 .flat-bottom {
   border-bottom-left-radius: 0 !important;
   border-bottom-right-radius: 0 !important;
@@ -80,6 +84,278 @@ html { scroll-behavior: smooth; }
   opacity:.04;           /* <- adjust .02–.06 */
   z-index: 0;
 }
+
+/* ---------------------- */
+
+/* ---------- Shared dark CRT band (black + scanlines) ---------- */
+.crt-band {
+  position: relative;
+  isolation: isolate;            /* predictable blending for overlays */
+  background: #000;
+  overflow: hidden;
+}
+
+/* baseline scanlines (always on, subtle) */
+.crt-band::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    /* scanlines */
+    repeating-linear-gradient(
+      to bottom,
+      rgba(255,255,255,.055) 0px,
+      rgba(255,255,255,.055) 1px,
+      transparent 2px,
+      transparent 3px
+    );
+  opacity: .75;                  /* .12 tweak strength here */
+  mix-blend-mode: screen;
+
+  /* background-size: 100% 2px, 3px 100%; */
+}
+
+/* ---------- Chaotic noise flicker (on top of scanlines, under content) ---------- */
+.noise-flicker::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;                    /* above ::before scanlines */
+  pointer-events: none;
+  background-image: url("/textures/noise.png");
+  background-size: auto 320px;
+  background-repeat: repeat;
+  mix-blend-mode: screen;        /* looks best on black */
+  opacity: 0;
+  animation: noise-pop 7.5s steps(1, end) infinite;  /* 7.5s */
+}
+
+/* Base: noise overlay element (we'll add 2 of these per section) */
+.noise-seq {
+  position: absolute;
+  inset: 0;
+  z-index: 2;                  /* above scanlines (::before), below content */
+  pointer-events: none;
+  background-image: url("/textures/noise.png");
+  background-size: auto 340px;
+  background-repeat: repeat;
+  mix-blend-mode: screen;      /* looks good on black; try soft-light for subtler */
+  opacity: 0;
+}
+
+/* Single-pop stream: ~3–4 singles every ~10s (instant on/off) */
+.noise-single {
+  animation: noiseSingle 10s steps(1,end) infinite;
+  /* optional intensity knob */
+  --pop-opacity: 0.02;
+}
+
+/* Double-pop stream: 2 “double taps” every ~12s (instant on/off) */
+.noise-double {
+  animation: noiseDouble 12s steps(1,end) infinite;
+  --pop-opacity: 0.16;
+}
+
+/* Single-pop keyframes (≥ ~2s between events) */
+@keyframes noiseSingle2 {
+  0%, 9%    { opacity: 0; }
+  10%       { opacity: var(--pop-opacity); }  /* pop */
+  11%, 31%  { opacity: 0; }
+  32%       { opacity: var(--pop-opacity); }  /* pop */
+  33%, 57%  { opacity: 0; }
+  58%       { opacity: var(--pop-opacity); }  /* pop */
+  59%, 83%  { opacity: 0; }
+  84%       { opacity: var(--pop-opacity); }  /* pop */
+  85%,100%  { opacity: 0; }
+}
+
+/* Double-pop keyframes (two quick hits per sequence, then calm) */
+@keyframes noiseDouble2 {
+  0%, 19% { opacity: 0; }
+  20%    { opacity: var(--pop-opacity); }     /* pop 1 */
+  21%    { opacity: 0; }
+  22%    { opacity: var(--pop-opacity); }     /* pop 2 */
+  23%, 69% { opacity: 0; }
+  70%    { opacity: var(--pop-opacity); }     /* pop 1 */
+  71%    { opacity: 0; }
+  72%    { opacity: var(--pop-opacity); }     /* pop 2 */
+  73%,100% { opacity: 0; }
+}
+
+/* FEWER pops per cycle (sparser), each still 1% long */
+@keyframes noiseSingle3 {
+  0%, 24%  { opacity: 0; }
+  25%      { opacity: .05; }  /* pop */
+
+  26%, 64% { opacity: 0; }
+  65%      { opacity: .12; }  /* pop .18 */
+  66%,100% { opacity: 0; }
+}
+
+@keyframes noiseDouble {
+  0%, 39%  { opacity: 0; }
+  40%      { opacity: .07; }  /* pop 1 */
+  41%      { opacity: 0; }
+  42%      { opacity: .10; }  /* pop 2 */
+  43%,100% { opacity: 0; }
+}
+
+@keyframes noiseSingle {
+  0%, 9%    { opacity: 0; }
+  10%       { opacity: var(--pop-opacity); }  /* pop */
+  11%, 31%  { opacity: 0; }
+  32%       { opacity: .08; }  /* pop */
+  33%, 57%  { opacity: 0; }
+  58%       { opacity: .01; }  /* pop */
+  59%, 83%  { opacity: 0; }
+  84%       { opacity: var(--pop-opacity); }  /* pop */
+  85%,100%  { opacity: 0; }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .noise-seq { animation: none !important; opacity: 0 !important; }
+}
+
+/* ------------ */
+
+/* Single + double flashes with very quick falloff (random-ish cadence) */
+@keyframes noise-burst {
+  0%, 6% { opacity: 0; }
+  7%   { opacity: .75; }         /* single flash */
+  8%   { opacity: .12; }
+  9%   { opacity: 0; }
+
+  24%  { opacity: .65; }         /* double flash (1/2) */
+  25%  { opacity: .18; }
+  26%  { opacity: 0; }
+  27%  { opacity: .45; }         /* double flash (2/2) */
+  28%  { opacity: .12; }
+  29%  { opacity: 0; }
+
+  47%  { opacity: .55; }         /* single flash */
+  48%  { opacity: .14; }
+  49%  { opacity: 0; }
+
+  72%  { opacity: .7; }          /* single flash */
+  73%  { opacity: .16; }
+  74%  { opacity: 0; }
+
+  86%  { opacity: .6; }          /* quick blip near the end */
+  87%  { opacity: .1; }
+  88%, 100% { opacity: 0; }
+}
+
+/* Random-ish quick pops (single + double) — no fades */
+
+@keyframes noise-pop {
+  0%, 19%   { opacity: 0; }
+  20%       { opacity: .2; }
+  21%       { opacity: 0; }
+
+  55%       { opacity: .18; }
+  56%       { opacity: 0; }
+
+  85%       { opacity: .2; }
+  86%,100%  { opacity: 0; }
+}
+
+@keyframes noise-pop2 {
+  0%, 9%    { opacity: 0; }
+  10%       { opacity: .22; }  /* single pop */
+  11%       { opacity: 0; }
+
+  23%       { opacity: .18; }  /* double pop (1/2) */
+  24%       { opacity: 0; }
+  25%       { opacity: .18; }  /* double pop (2/2) */
+  26%       { opacity: 0; }
+
+  41%       { opacity: .20; }  /* single pop */
+  42%       { opacity: 0; }
+
+  63%       { opacity: .16; }  /* single pop (softer) */
+  64%       { opacity: 0; }
+
+  78%       { opacity: .20; }  /* quick late pop */
+  79%       { opacity: 0; }
+
+  92%       { opacity: .18; }  /* final pop */
+  93%,100%  { opacity: 0; }
+}
+
+/* Motion safety */
+/* @media (prefers-reduced-motion: reduce) {
+  .noise-flicker::after { animation: none; opacity: 0; }
+} */
+
+/* ---------- Optional: horizontal tear/jitter (not applied yet) ---------- */
+.crt-tear::after {
+  /* you can layer this INSTEAD of noise-flicker later */
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 6px,
+      rgba(255,255,255,.08) 7px,
+      transparent 8px
+    );
+  mix-blend-mode: screen;
+  animation: tear-jitter 1.6s infinite steps(1, end);
+  opacity: .25;
+}
+
+@keyframes tear-jitter {
+  0%   { transform: translateX(0); }
+  25%  { transform: translateX(1px); }
+  26%  { transform: translateX(-1px); }
+  27%  { transform: translateX(0); }
+  60%  { transform: translateX(0); }
+  61%  { transform: translateX(1px); }
+  62%  { transform: translateX(0); }
+  100% { transform: translateX(0); }
+}
+
+
+/* Chaotic CRT noise burst overlay */
+/* .crt-chaos::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("/textures/noise.png");
+  background-size: auto 300px;
+  background-repeat: repeat;
+  opacity: 0;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  animation: crt-chaos-flicker 8s infinite;
+  z-index: 2;
+}
+
+@keyframes crt-chaos-flicker {
+  0%, 100% { opacity: 0; }
+  10% { opacity: .2; }
+  11% { opacity: .6; }
+  12% { opacity: .15; }
+  30% { opacity: 0; }
+  45% { opacity: .35; }
+  46% { opacity: .8; }
+  47% { opacity: .25; }
+  60% { opacity: 0; }
+  75% { opacity: .2; }
+  76% { opacity: .7; }
+  77% { opacity: .1; }
+  90% { opacity: 0; }
+} */
+
+
+
 
 /* Clip an element to the laptop screen shape */
 .screen-mask {
@@ -285,8 +561,8 @@ html { scroll-behavior: smooth; }
   background-position: center;
 }
 
-/* ---------- Footer: dark CRT bookend ---------- */
-.footer.crt-dark {
+/* ---------- Footer: dark CRT bookend ----------  crt-band footer2.crt-dark*/
+.footer.crt-band {
   position: relative;
   background: #0a0a0a; /* deep black */
   color: #e5e7eb;      /* zinc-200-ish */
@@ -296,7 +572,7 @@ html { scroll-behavior: smooth; }
   isolation: isolate;
 }
 
-.footer .scanline {
+.footer2 .scanline {
   position: absolute;
   inset-inline: 0;
   top: 0;
@@ -307,7 +583,7 @@ html { scroll-behavior: smooth; }
 }
 
 /* CRT scanlines */
-.footer.crt-dark::before {
+.footer2.crt-dark::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -324,7 +600,7 @@ html { scroll-behavior: smooth; }
 }
 
 /* Noise overlay */
-.footer.crt-dark::after {
+.footer2.crt-dark::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -396,7 +672,7 @@ html { scroll-behavior: smooth; }
 }
 
 /* subtle flicker/glitch on hover (footer only for now) */
-@keyframes crt-flicker {
+@keyframes crt-hover-flicker {
   0% { filter: none; }
   45% { filter: brightness(1.18) contrast(1.04); }
   50% { transform: translateY(-0.3px); }
@@ -405,7 +681,7 @@ html { scroll-behavior: smooth; }
 }
 .footer-nav a:hover,
 .footer-socials .icon:hover {
-  animation: crt-flicker .25s linear 1;
+  animation: crt-hover-flicker .25s linear 1;
   border-color: rgba(255,255,255,.25);
   color: #ffffff;
   transform: translateY(-1px);
@@ -511,7 +787,7 @@ html { scroll-behavior: smooth; }
 /* Subtle off-silver + CRT vibe for section backgrounds */
 .bg-crt-subtle {
   position: relative;                /* #f6f7f8; off-silver base (adjust if needed) */
-  border-radius: 16px;                  /* 16px soft card-like edge */
+  /* border-radius: 16px;  */                /* 16px soft card-like edge */
   overflow: hidden;                     /* contain overlays */
   z-index: 0;
 }
@@ -567,6 +843,40 @@ html { scroll-behavior: smooth; }
   content: none !important;
   background: none !important;
 }
+
+/* ===== Typewriter (reusable) ===== */
+.typewriter {
+  display: inline-flex;          /* keeps caret on same line */
+  align-items: baseline;
+  white-space: nowrap;           /* keep it on one line */
+  font-variant-ligatures: none;  /* more “terminal” feel */
+}
+
+.typewriter .tw-text { 
+  /* nothing needed; text color is inherited from parent */
+}
+
+.typewriter .tw-caret {
+  width: .55ch;                  /* .55ch narrow caret */
+  margin-left: .05ch;
+  border-left: 1ch solid currentColor;   /* 2px caret color = current text color */
+  align-self: stretch;
+  translate: 0 .05em;            /* optically center */
+  animation: tw-blink .9s steps(1, end) infinite;
+  opacity: .9;
+}
+
+@keyframes tw-blink {
+  0%, 49%   { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+/* Respect reduced motion: show all text immediately, keep a steady caret */
+@media (prefers-reduced-motion: reduce) {
+  .typewriter[data-ready="true"] .tw-text { width: auto; }
+  .typewriter .tw-caret { animation: none; opacity: .6; }
+}
+
 /*
 <section id="services" class="wrap section-gap bg-crt-subtle bg-crt-light section-pad">
   <div class="wrap">
