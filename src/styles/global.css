@@ -877,24 +877,86 @@ html { scroll-behavior: smooth; }
   .typewriter .tw-caret { animation: none; opacity: .6; }
 }
 
-/*
-<section id="services" class="wrap section-gap bg-crt-subtle bg-crt-light section-pad">
-  <div class="wrap">
+/* --- Services Page --- */
 
-  <header class="mb-8">
-      <h2 class="section-header pop">Services</h2>
-      <div class="heading-rule"></div>
-    </header>
+/* -------- shared text utilities -------- */
+.lead { font-size: clamp(1.05rem, 1.2vw + .8rem, 1.25rem); line-height: 1.5; }
+.muted { color: rgb(113 113 122); } /* zinc-500/600 range */
 
-    <div class="std-grid">
+/* -------- lightweight card pattern (matches your sections) -------- */
+.card {
+  background: white;
+  border: 1px solid rgb(228 228 231);        /* zinc-200 */
+  border-radius: 0.75rem;                    /* rounded-lg */
+  padding: 1.25rem;                          /* p-5 */
+  box-shadow: 0 1px 0 rgba(0,0,0,.03);       /* subtle */
+}
+.card-title {
+  font-weight: 600;
+  font-size: 1.125rem;                       /* text-lg */
+  letter-spacing: 0.01em;
+  display: flex; align-items: baseline; gap: .5rem;
+}
+.card-body { margin-top: .5rem; color: rgb(82 82 91); }
 
-  --
+/* dashed list (Analytics/SEO) */
+.list-dash { margin-top: .5rem; color: rgb(82 82 91); }
+.list-dash li { position: relative; padding-left: 1rem; margin: .375rem 0; }
+.list-dash li::before {
+  content: "–"; position: absolute; left: 0; color: rgb(113 113 122);
+}
 
-<section id="services" class="wrap section-gap bg-crt-subtle bg-crt-light section-pad"> <!-- py-20 bg-white  -->
-  <div class="max-w-6xl mx-auto px-6">
+/* tiny badge next to headings (price hint) */
+.price-hint {
+  display: inline-block;
+  font-size: .8rem;
+  color: rgb(82 82 91);
+  background: rgb(244 244 245);              /* zinc-100 */
+  border: 1px solid rgb(228 228 231);        /* zinc-200 */
+  border-radius: 999px;
+  padding: .15rem .5rem;
+}
 
-  <header class="mb-8">
-      <h2 class="section-header pop">Services</h2>
+/* small note panel */
+.panel.note {
+  background: rgba(250,250,250,.85);
+  border: 1px dashed rgb(212 212 216);       /* zinc-300 */
+  border-radius: .75rem;
+  padding: 1rem 1.25rem;
+  color: rgb(63 63 70);
+}
 
-      <div class="grid gap-8 md:grid-cols-3">
-*/
+/* final CTA panel */
+.panel-cta {
+  background: white;
+  border: 1px solid rgb(228 228 231);
+  border-radius: 1rem;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  box-shadow: 0 1px 0 rgba(0,0,0,.03);
+  text-align: center;
+}
+
+/* simple icon list look without extra assets */
+.icon-list {
+  display: flex; flex-wrap: wrap; gap: .75rem 1rem;
+  color: rgb(63 63 70);
+}
+.icon-list li {
+  border: 1px solid rgb(228 228 231);
+  background: white;
+  border-radius: .5rem;
+  padding: .4rem .6rem;
+  font-size: .925rem;
+}
+
+/* CTA row (keeps buttons aligned & spaced) */
+.cta-row { display: flex; gap: .75rem; flex-wrap: wrap; }
+
+/* buttons (reuse your look; these just ensure availability on this page) */
+.btn { display: inline-flex; align-items: center; justify-content: center; border-radius: .5rem; padding: .6rem 1rem; font-weight: 500; border: 1px solid transparent; }
+.btn-primary { background: #000; color: #fff; }
+.btn-primary:hover { filter: brightness(1.1); }
+.btn-ghost { background: transparent; color: rgb(39 39 42); border-color: rgb(228 228 231); }
+.btn-ghost:hover { background: rgb(250 250 250); }
+
+

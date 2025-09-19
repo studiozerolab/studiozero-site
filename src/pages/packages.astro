@@ -1,0 +1,226 @@
+---
+import Base from "../layouts/Base.astro";
+import Footer from '../components/Footer.astro'
+import PricingGrid from "../components/PricingGrid.astro";
+import AddOnsList from "../components/AddOnsList.astro";
+
+/* --------------------------- DATA ---------------------------- */
+
+// One-time website builds
+const WEBSITE_PACKAGES = [
+  {
+    tier: "Starter",
+    price: "$450",
+    cadence: "one-time",
+    points: [
+      "1-page scrolling site (template-based)",
+      "Mobile-friendly + baseline SEO",
+      "Domain + hosting setup (client-managed)",
+      "1 email account setup (Zoho free/premium)",
+      "Static QR code",
+    ],
+    ctas: [
+      { label: "Learn More", href: "/services#websites", style: "ghost" },
+      { label: "Quick Start", href: "/contact?package=starter", style: "solid" },
+    ],
+  },
+  {
+    tier: "Growth",
+    price: "$1,050",
+    cadence: "one-time",
+    featured: true,
+    points: [
+      "3–5 page semi-custom site",
+      "Mobile-friendly + baseline SEO",
+      "Hosting setup (client-managed)",
+      "Up to 3 email accounts (free/premium)",
+      "Online payments (PayPal, Venmo Business, Stripe)",
+      "Branded QR codes + newsletter signup",
+    ],
+    ctas: [
+      { label: "Learn More", href: "/services#websites", style: "ghost" },
+      { label: "Quick Start", href: "/contact?package=growth", style: "solid" },
+    ],
+  },
+  {
+    tier: "Pro",
+    price: "$2,100",
+    cadence: "one-time",
+    points: [
+      "Fully custom layout & components",
+      "Performance-optimized & accessible",
+      "Hosting setup (client-managed)",
+      "Up to 5 email accounts",
+      "Advanced payments (Stripe + subscriptions)",
+      "Email marketing setup + branded templates",
+    ],
+    ctas: [
+      { label: "Learn More", href: "/services#websites", style: "ghost" },
+      { label: "Quick Start", href: "/contact?package=pro", style: "solid" },
+    ],
+  },
+];
+
+// Monthly plans
+const MONTHLY_PLANS = [
+  {
+    tier: "Base",
+    price: "$35",
+    cadence: "/mo",
+    points: [
+      "Hosting + SSL included",
+      "Security monitoring",
+      "Core updates",
+      "Monthly uptime check",
+      "Add-ons: Email mgmt, Analytics reports",
+    ],
+    ctas: [
+      { label: "Learn More", href: "/services#hosting-email", style: "ghost" },
+      { label: "Quick Start", href: "/contact?plan=base", style: "solid" },
+    ],
+  },
+  {
+    tier: "Growth",
+    price: "$95",
+    cadence: "/mo",
+    featured: true,
+    points: [
+      "Everything in Base",
+      "Monthly content updates (text/images)",
+      "Analytics: Growth Insights tier included",
+      "Priority email support",
+      "Add-ons: SEO check-ins, Campaign mgmt",
+    ],
+    ctas: [
+      { label: "Learn More", href: "/services#analytics-seo", style: "ghost" },
+      { label: "Quick Start", href: "/contact?plan=growth", style: "solid" },
+    ],
+  },
+  {
+    tier: "Pro",
+    price: "$195",
+    cadence: "/mo",
+    points: [
+      "Everything in Growth",
+      "Ongoing SEO support & GBP optimization",
+      "Email campaign management (1 blast/mo)",
+      "Custom branded QR codes",
+      "Priority turnaround on requests",
+    ],
+    ctas: [
+      { label: "Learn More", href: "/services#analytics-seo", style: "ghost" },
+      { label: "Quick Start", href: "/contact?plan=pro", style: "solid" },
+    ],
+  },
+];
+
+// Add-ons (grouped)
+const ADDONS = [
+  {
+    group: "Email",
+    items: [
+      "Setup ($75–150)", "Management ($10–15/account/mo)",
+      "Branded templates ($100–250)", "Campaign mgmt ($50–100/send)",
+    ],
+  },
+  {
+    group: "Analytics",
+    items: ["Basic (+$25/mo)", "Growth (+$50–75/mo)", "Pro (future)"],
+  },
+  {
+    group: "SEO",
+    items: [
+      "Google Business Profile setup ($100–200)",
+      "Keyword optimization ($150–300)",
+      "Quarterly check-ins ($75–150)",
+    ],
+  },
+  {
+    group: "Online Payments",
+    items: ["Setup ($100–200)", "Subscriptions/recurring ($150–300)"],
+  },
+  {
+    group: "QR Codes",
+    items: ["Static ($25–50)", "Branded ($50–100)"],
+  },
+  {
+    group: "Domains & Hosting",
+    items: ["DNS + SSL/security ($50–100)", "Migrations ($100–200)"],
+  },
+];
+---
+
+<Base title="Packages & Pricing">
+  <!-- Hero -->
+  <section class="wrap section-gap bg-crt-subtle bg-crt-mid section-pad">
+    <div class="max-w-4xl mx-auto text-center">
+      <h1 class="section-header pop">Packages & Pricing</h1>
+      <p class="mt-3 text-zinc-600">
+        Clear, practical options. Start simple, grow as you go.
+      </p>
+      <div class="mt-6 flex items-center justify-center gap-3">
+        <a href="/contact" class="btn btn-primary">Get Started</a>
+        <a href="/services" class="btn btn-ghost">View Services</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- One-time website packages -->
+  <section class="wrap section-gap bg-crt-subtle bg-crt-light section-pad">
+    <header class="mb-8">
+      <h2 class="section-header pop">Website Builds (One-Time Purchase)</h2>
+      <div class="heading-rule"></div>
+      <p class="mt-3 max-w-2xl text-zinc-600">
+        Pay once, get a professional website built for your business.
+        Mobile-friendly and SEO-ready by default.
+      </p>
+    </header>
+
+    <PricingGrid items={WEBSITE_PACKAGES} />
+  </section>
+
+  <!-- Monthly plans -->
+  <section class="wrap section-gap bg-crt-subtle bg-crt-subtle section-pad">
+    <header class="mb-8">
+      <h2 class="section-header pop">Ongoing Support (Monthly Plans)</h2>
+      <div class="heading-rule"></div>
+      <p class="mt-3 max-w-2xl text-zinc-600">
+        Keep your site secure, updated, and supported. Add features as you grow.
+      </p>
+    </header>
+
+    <PricingGrid items={MONTHLY_PLANS} monthly />
+  </section>
+
+  <!-- Add-ons -->
+  <section class="wrap section-gap bg-crt-subtle bg-crt-light section-pad">
+    <header class="mb-8">
+      <h2 class="section-header pop">Add-Ons & Standalone Services</h2>
+      <div class="heading-rule"></div>
+      <p class="mt-3 max-w-2xl text-zinc-600">
+        Customize any package or purchase as a standalone service.
+      </p>
+    </header>
+
+    <AddOnsList groups={ADDONS} />
+
+    <div class="mt-8">
+      <a href="/contact" class="btn btn-primary">Request a Custom Quote</a>
+    </div>
+  </section>
+
+  <!-- Closing CTA -->
+  <section class="wrap section-gap bg-crt-subtle bg-crt-dark section-pad">
+    <div class="max-w-3xl">
+      <h2 class="section-header pop">Not sure which package is right for you?</h2>
+      <p class="mt-3 text-zinc-400">
+        Let’s talk through your options — no pressure, no jargon.
+      </p>
+      <div class="mt-6 flex gap-3">
+        <a href="/contact" class="btn btn-primary">Schedule a Call</a>
+        <a href="/services" class="btn btn-ghost">View Services</a>
+      </div>
+    </div>
+  </section>
+</Base>
+<Footer/>

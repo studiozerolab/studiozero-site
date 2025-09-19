@@ -1,0 +1,55 @@
+---
+const { items = [], monthly = false } = Astro.props;
+---
+
+<div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+  {items.map((t) => (
+    <article
+      class={[
+        "group rounded-xl border transition-shadow",
+        t.featured
+          ? "border-zinc-300 shadow-sm bg-white"
+          : "border-zinc-200 bg-white",
+      ].join(" ")}
+    >
+      <div class="p-5 sm:p-6">
+        <div class="flex items-baseline justify-between gap-3">
+          <h3 class="text-lg font-semibold text-zinc-900">{t.tier}</h3>
+          <div class="text-right">
+            <div class="text-2xl font-bold text-zinc-900">{t.price}</div>
+            <div class="text-xs text-zinc-500">
+              {t.cadence ?? (monthly ? "/mo" : "flat")}
+            </div>
+          </div>
+        </div>
+
+        <ul class="mt-5 space-y-2 text-sm">
+          {t.points.map((p) => (
+            <li class="flex gap-2">
+              <svg class="h-4 w-4 mt-0.5 shrink-0 text-emerald-500" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                <path fill-rule="evenodd" d="M16.704 5.29a1 1 0 0 1 .006 1.414l-7.25 7.3a1 1 0 0 1-1.42.004l-4.25-4.2A1 1 0 1 1 5.29 8.29l3.54 3.5 6.54-6.56a1 1 0 0 1 1.334-.06z" clip-rule="evenodd"/>
+              </svg>
+              <span class="text-zinc-700">{p}</span>
+            </li>
+          ))}
+        </ul>
+
+        <div class="mt-6 flex items-center gap-3">
+          {t.ctas?.map((c) => (
+            <a
+              href={c.href}
+              class={[
+                "inline-flex items-center justify-center rounded-lg px-4 py-2 text-sm font-medium transition",
+                c.style === "solid"
+                  ? "bg-black text-white hover:bg-zinc-900"
+                  : "border border-zinc-300 text-zinc-900 hover:border-zinc-400",
+              ].join(" ")}
+            >
+              {c.label}
+            </a>
+          ))}
+        </div>
+      </div>
+    </article>
+  ))}
+</div>

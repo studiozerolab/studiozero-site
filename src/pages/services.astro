@@ -1,0 +1,206 @@
+---
+import Base from '../layouts/Base.astro';
+import Footer from '../components/Footer.astro'
+
+// quick helpers for CTAs
+const pkg = '/packages';
+const contact = '/#contact';
+const title = "Services • Studio Zero";
+const descrip = "Websites, hosting & email, analytics & SEO - everything your business needs to get online and grow.";
+---
+
+
+  <!-- <head>
+    <title>Services • Studio Zero</title>
+    <meta name="description" content="Websites, hosting & email, analytics & SEO — everything your business needs to get online and grow." />
+  </head> -->
+
+  <!-- <body class="bg-white text-zinc-900"> -->
+    <!-- <Header /> -->
+
+    <!-- HERO / INTRO (same CRT band style you use for the homepage hero) -->
+
+    <!-- <section class="crt-band section-gap">
+      <div class="wrap">
+        <header class="mb-8">
+          <h1 class="section-header pop">Our Services</h1>
+          <p class="lead text-zinc-400 max-w-3xl">
+            Websites, hosting &amp; email, and analytics &amp; SEO — everything your business needs to get online and grow.
+          </p>
+          <div class="cta-row mt-6">
+            <a href={`${pkg}`} class="btn btn-primary">View Packages</a>
+            <a href={contact} class="btn btn-ghost">Contact Us</a>
+          </div>
+        </header>
+      </div>
+    </section> -->
+    <Base title={title} descrip={descrip}>
+    <!-- SECTION 1: WEBSITES -->
+    <section id="websites" class="wrap section-gap bg-crt-subtle bg-crt-light section-pad">
+      <header class="mb-8">
+        <h2 class="section-header pop">Websites</h2>
+        <p class="muted max-w-3xl">
+          Modern, mobile-friendly websites with clear pricing and options for every stage of business.
+        </p>
+      </header>
+
+      <div class="grid gap-8 md:grid-cols-3">
+        <!-- Starter Sites -->
+        <article class="card">
+          <h3 class="card-title">Starter Sites <span class="price-hint">from $450</span></h3>
+          <p class="card-body">
+            One-page templates personalized for your business. Fast launch, clean design, built on best practices.
+          </p>
+        </article>
+
+        <!-- Growth Sites -->
+        <article class="card">
+          <h3 class="card-title">Growth Sites <span class="price-hint">from $1,050</span></h3>
+          <p class="card-body">
+            3–5 page semi-custom builds for growing businesses—room for services, work, and a contact funnel.
+          </p>
+        </article>
+
+        <!-- Pro Sites -->
+        <article class="card">
+          <h3 class="card-title">Pro Sites <span class="price-hint">from $2,100</span></h3>
+          <p class="card-body">
+            Fully custom layouts with advanced tools, content models, and integrations tailored to your goals.
+          </p>
+        </article>
+      </div>
+
+      <div class="mt-8 grid gap-6 lg:grid-cols-2">
+        <article class="card">
+          <h4 class="card-title">Template vs Custom</h4>
+          <p class="card-body">
+            Choose from Studio Zero templates for fast, affordable builds, or go fully custom for a unique experience.
+          </p>
+        </article>
+
+        <aside class="panel note">
+          <p>
+            Want detailed pricing? See the <a class="link" href={`${pkg}#websites`}>Website Packages</a>.
+          </p>
+        </aside>
+      </div>
+
+      <div class="mt-8">
+        <a href={`${pkg}#websites`} class="btn btn-primary">See Website Packages</a>
+      </div>
+    </section>
+
+    <!-- SECTION 2: HOSTING & EMAIL -->
+    <section id="hosting-email" class="wrap section-gap bg-crt-subtle bg-crt-mid section-pad">
+      <header class="mb-8">
+        <h2 class="section-header pop">Hosting &amp; Email</h2>
+        <p class="muted max-w-3xl">
+          Reliable hosting, domain setup, and professional email — managed by us or handed off to you.
+        </p>
+      </header>
+
+      <div class="grid gap-8 md:grid-cols-2">
+        <article class="card">
+          <h3 class="card-title">Hosting Setup or Managed <span class="price-hint">plans from $35/mo</span></h3>
+          <p class="card-body">
+            We’ll configure client-controlled hosting, or provide fully managed hosting so you never worry about uptime, SSL, or updates.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3 class="card-title">Domain &amp; DNS Setup</h3>
+          <p class="card-body">
+            Domain registration, DNS records, and SSL—set up cleanly for performance and search visibility.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3 class="card-title">Professional Email</h3>
+          <p class="card-body">
+            Setup with Zoho (free tier available) or premium providers like Google Workspace or Microsoft 365.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3 class="card-title">Email Marketing</h3>
+          <p class="card-body">
+            Newsletter tools, signup forms, and branded templates to keep your audience engaged.
+          </p>
+        </article>
+      </div>
+
+      <div class="mt-8">
+        <a href={`${pkg}#hosting-email`} class="btn btn-primary">See Packages &amp; Add-Ons</a>
+      </div>
+    </section>
+
+    <!-- SECTION 3: ANALYTICS & SEO -->
+    <section id="analytics" class="wrap section-gap bg-crt-subtle bg-crt-dark section-pad">
+      <header class="mb-8">
+        <h2 class="section-header pop">Analytics &amp; SEO</h2>
+        <p class="muted max-w-3xl">
+          Track your visitors, understand your customers, and help new ones find you.
+        </p>
+      </header>
+
+      <div class="grid gap-8 md:grid-cols-2">
+        <article class="card">
+          <h3 class="card-title">Analytics</h3>
+          <ul class="list-dash">
+            <li><strong>Basic</strong>: monthly traffic summary <span class="price-hint">from $25/mo</span></li>
+            <li><strong>Growth</strong>: keyword insights + recommendations <span class="price-hint">from $50/mo</span></li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3 class="card-title">SEO</h3>
+          <ul class="list-dash">
+            <li>Baseline SEO included with all sites</li>
+            <li>Google Business Profile setup</li>
+            <li>Keyword optimization &amp; quarterly check-ins (add-on)</li>
+          </ul>
+        </article>
+      </div>
+
+      <div class="mt-8">
+        <a href={`${pkg}#analytics`} class="btn btn-primary">See Analytics Add-Ons</a>
+      </div>
+    </section>
+
+    <!-- OPTIONAL: ADD-ONS CALLOUT -->
+    <section id="addons" class="wrap section-gap bg-crt-subtle bg-crt-light section-pad">
+      <header class="mb-6">
+        <h2 class="section-header pop">Add-Ons &amp; Standalone Services</h2>
+        <p class="muted max-w-3xl">
+          Available with any package or as standalone services if you already have a site.
+        </p>
+      </header>
+
+      <ul class="icon-list">
+        <li>Email Campaigns</li>
+        <li>QR Codes</li>
+        <li>Online Payments</li>
+        <li>Extra Domains</li>
+        <li>Security Setup</li>
+      </ul>
+
+      <div class="mt-8">
+        <a href={`${pkg}#addons`} class="btn btn-ghost">Explore Add-Ons</a>
+      </div>
+    </section>
+
+    <!-- CLOSING CTA -->
+    <section class="wrap section-gap">
+      <div class="panel-cta">
+        <h2 class="text-2xl font-semibold tracking-tight">Ready to get started? Let’s build something great together.</h2>
+        <div class="cta-row mt-4">
+          <a href={`${pkg}`} class="btn btn-primary">View Packages</a>
+          <a href={contact} class="btn btn-ghost">Contact Us</a>
+        </div>
+      </div>
+    </section>
+</Base>
+
+    <Footer />
+  <!-- </body> -->
+
