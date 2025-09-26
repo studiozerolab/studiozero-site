@@ -47,7 +47,11 @@ const descrip = "Websites, hosting & email, analytics & SEO - everything your bu
       <div class="grid gap-8 md:grid-cols-3">
         <!-- Starter Sites -->
         <article class="card">
-          <h3 class="card-title">Starter Sites <span class="price-hint">from $450</span></h3>
+          <div class="card-head">
+          <h3 class="card-title">Starter Sites </h3>
+          <span class="inline-flex items-center whitespace-nowrap text-xs px-2 py-0.5 rounded-full bg-zinc-100 text-zinc-700 leading-none">from $450</span>
+          <!-- ^ class="price-hint" ^ -->  
+        </div>
           <p class="card-body">
             One-page templates personalized for your business. Fast launch, clean design, built on best practices.
           </p>
@@ -55,7 +59,10 @@ const descrip = "Websites, hosting & email, analytics & SEO - everything your bu
 
         <!-- Growth Sites -->
         <article class="card">
-          <h3 class="card-title">Growth Sites <span class="price-hint">from $1,050</span></h3>
+          <div class="card-head">
+          <h3 class="card-title">Growth Sites</h3>
+          <span class="inline-flex items-center whitespace-nowrap text-xs px-2 py-0.5 rounded-full bg-zinc-100 text-zinc-700 leading-none">from $1,050</span>
+          </div>
           <p class="card-body">
             3–5 page semi-custom builds for growing businesses—room for services, work, and a contact funnel.
           </p>
@@ -63,7 +70,10 @@ const descrip = "Websites, hosting & email, analytics & SEO - everything your bu
 
         <!-- Pro Sites -->
         <article class="card">
-          <h3 class="card-title">Pro Sites <span class="price-hint">from $2,100</span></h3>
+          <div class="card-head">
+          <h3 class="card-title">Pro Sites</h3>
+          <span class="inline-flex items-center whitespace-nowrap text-xs px-2 py-0.5 rounded-full bg-zinc-100 text-zinc-700 leading-none">from $2,100</span>
+          </div>
           <p class="card-body">
             Fully custom layouts with advanced tools, content models, and integrations tailored to your goals.
           </p>
@@ -101,7 +111,10 @@ const descrip = "Websites, hosting & email, analytics & SEO - everything your bu
 
       <div class="grid gap-8 md:grid-cols-2">
         <article class="card">
-          <h3 class="card-title">Hosting Setup or Managed <span class="price-hint">plans from $35/mo</span></h3>
+          <div class="card=head">
+          <h3 class="card-title">Hosting Setup or Managed</h3>
+            <span class="inline-flex items-center whitespace-nowrap text-xs px-2 py-0.5 rounded-full bg-zinc-100 text-zinc-700 leading-none">plans from $35/mo</span>
+          </div>
           <p class="card-body">
             We’ll configure client-controlled hosting, or provide fully managed hosting so you never worry about uptime, SSL, or updates.
           </p>
@@ -147,8 +160,8 @@ const descrip = "Websites, hosting & email, analytics & SEO - everything your bu
         <article class="card">
           <h3 class="card-title">Analytics</h3>
           <ul class="list-dash">
-            <li><strong>Basic</strong>: monthly traffic summary <span class="price-hint">from $25/mo</span></li>
-            <li><strong>Growth</strong>: keyword insights + recommendations <span class="price-hint">from $50/mo</span></li>
+            <li><strong>Basic</strong>: monthly traffic summary <span class="inline-flex items-center whitespace-nowrap text-xs px-2 py-0.5 rounded-full bg-zinc-100 text-zinc-700 leading-none">from $25/mo</span></li>
+            <li><strong>Growth</strong>: keyword insights + recommendations <span class="inline-flex items-center whitespace-nowrap text-xs px-2 py-0.5 rounded-full bg-zinc-100 text-zinc-700 leading-none">from $50/mo</span></li>
           </ul>
         </article>
 
@@ -185,14 +198,14 @@ const descrip = "Websites, hosting & email, analytics & SEO - everything your bu
       </ul>
 
       <div class="mt-8">
-        <a href={`${pkg}#addons`} class="btn btn-ghost">Explore Add-Ons</a>
+        <a href={`${pkg}#addons`} class="btn btn-primary">Explore Add-Ons</a>
       </div>
     </section>
 
     <!-- CLOSING CTA -->
     <section class="wrap section-gap">
       <div class="panel-cta">
-        <h2 class="text-2xl font-semibold tracking-tight">Ready to get started? Let’s build something great together.</h2>
+        <h2 class="text-2xl font-semibold tracking-tight text-zinc-700">Ready to get started? Let’s build something great together.</h2>
         <div class="cta-row mt-4">
           <a href={`${pkg}`} class="btn btn-primary">View Packages</a>
           <a href={contact} class="btn btn-ghost">Contact Us</a>

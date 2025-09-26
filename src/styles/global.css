@@ -1322,7 +1322,9 @@ html { scroll-behavior: smooth; }
   /* display: inline-flex;
   align-items: center;
   
-  font-weight: 500; */
+  font-weight: 500; 
+  inline-flex items-center whitespace-nowrap text-xs px-2 py-0.5 rounded-full bg-zinc-100 text-zinc-700 leading-none
+  */
   
   flex: 0 0 auto;
   white-space: nowrap;
