@@ -82,29 +82,39 @@ const tiers = [
     </p>
 
     <!-- panel with subtle grid like Services -->
-    <!-- <div class=" rounded-2xl border border-zinc-200 mt-8 p-4 sm:p-6"> //panel-grid -->
-      <div class="std-grid"> <!-- grid gap-6 sm:gap-8 lg:grid-cols-3" -->
+    <!-- <div class=" rounded-2xl border border-zinc-200 mt-8 p-4 sm:p-6"> //panel-grid  article class=card-->
+      <div class="std-grid std-grid--smart std-grid--fixed">
         {tiers.map((t) => (
           <article
             class={[
-              "group rounded-xl border transition-shadow p-5 flex flex-col",
+              "bg-white border border-gray-200 rounded-lg p-6 shadow-md",
               t.featured
                 ? "border-zinc-300 shadow-sm bg-white"
                 : "border-zinc-200 bg-white",
             ].join(" ")}
           >
-            <div class="grow">
-            <div class="mb-2 mt-0"> {/* p-6 sm:p-7 */}
-              <div class="flex items-center gap-2"> {/* items-baseline */}
-                <h3 class="text-xl font-bold text-gray-900 leading-tight">{t.name}</h3>
+            {/* <div class="card-body">  grow */}
+            {/* <div class="mb-2 mt-0"> || p-6 sm:p-7 */}
+              {/* <div class="flex items-baseline justify-between">  /* items-baseline || gap-2 */}
+                {/* <h3 class="text-xl font-bold text-gray-900 leading-tight">{t.name}</h3>
                 {t.tag &&
                 <span class="inline-flex items-center whitespace-nowrap text-xs px-2 py-0.5 rounded-full bg-zinc-100 text-zinc-700 leading-none">
                   {t.tag}
                 </span>
                 }
+              </div> */}
+              <div class="card-head">
+              <h3 class="card-title">{t.name}</h3>
+              {t.tag &&
+                <span class="inline-flex items-center whitespace-nowrap text-xs px-2 py-0.5 rounded-full bg-zinc-100 text-zinc-700 leading-none">
+                  {t.tag}
+                </span>
+                }
+              
               </div>
 
-              <div class="mt-3 flex items-end gap-2">
+              {/* <div class="mt-3 flex items-end gap-2"> */}
+              <div class="card-body">
                 
                 <p class="mt-2 text-2xl font-bold text-gray-900">
                   {typeof t.price === "number" ? `$${t.price}` : t.price}
@@ -139,20 +149,20 @@ const tiers = [
                 {t.cta.label}
               </a>
               </div> */}
+            {/* </div> */}
             </div>
-            </div>
-            <div class="mt-6 pt-4 flex justify-center gap-3"> {/* mt-6 pt-4 flex flex-wrap items-center gap-3 */}
+            <div class="card-actions"> {/* mt-6 pt-4 flex justify-center gap-3 || mt-6 pt-4 flex flex-wrap items-center gap-3 */}
               { t.quickHref &&
             <a href={t.quickHref}
-               class="inline-flex items-center justify-center rounded-lg px-4 py-2 text-sm font-medium text-white bg-black hover:bg-zinc-900">
+               class="btn btn-black">
               Quick Start
             </a>
             }
             <a href={t.learnHref}
-               class="inline-flex items-center justify-center rounded-lg px-4 py-2 text-sm font-medium text-zinc-900 border border-zinc-300 hover:border-zinc-500">
+            class="btn btn-outline">
               Learn More
             </a>
-          </div>
+          {/* </div> */}
           </article>
         ))}
       </div>
@@ -161,7 +171,7 @@ const tiers = [
       <p class="mt-3 text-xs text-zinc-500">
         Prices are typical starting points and may vary based on scope. Transparent proposals—no surprises.
       </p>
-      <AddOnsTeaser />
+      
     <!-- </div> -->
      
      <!-- Full packages button -->

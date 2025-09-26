@@ -2,16 +2,17 @@
 const { items = [], monthly = false } = Astro.props;
 ---
 
-<div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+<div class="std-grid std-grid--smart std-grid--fixed">
   {items.map((t) => (
     <article
       class={[
-        "group rounded-xl border transition-shadow",
+        "rounded-xl border transition-shadow p-5",
         t.featured
           ? "border-zinc-300 shadow-sm bg-white"
           : "border-zinc-200 bg-white",
       ].join(" ")}
     >
+      <div class="grow">
       <div class="p-5 sm:p-6">
         <div class="flex items-baseline justify-between gap-3">
           <h3 class="text-lg font-semibold text-zinc-900">{t.tier}</h3>
@@ -33,8 +34,9 @@ const { items = [], monthly = false } = Astro.props;
             </li>
           ))}
         </ul>
-
-        <div class="mt-6 flex items-center gap-3">
+        </div>
+        </div>
+        <div class="mt-6 pt-4 flex justify-center gap-3"> {/* mt-6 pt-4 flex justify-center gap-3 || mt-6 flex items-center gap-3 */}
           {t.ctas?.map((c) => (
             <a
               href={c.href}
@@ -48,7 +50,7 @@ const { items = [], monthly = false } = Astro.props;
               {c.label}
             </a>
           ))}
-        </div>
+        {/* </div> */}
       </div>
     </article>
   ))}
