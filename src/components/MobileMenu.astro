@@ -1,0 +1,140 @@
+---
+/**
+ * Mobile hamburger + modal nav.
+ * - Put this inside your Header.astro (right side of the title bar).
+ * - Uses your utility system: wrap/section-pad (via header), dark zinc palette, no extra textures.
+ * - Closes on: link click, close button, overlay click, or ESC.
+ */
+interface LinkItem { href: string; label: string }
+interface Props {
+  links?: LinkItem[];
+  brand?: string; // optional brand text for the top of the sheet
+}
+const {
+  links = [
+    { href: '/', label: 'Home' },
+    { href: '/services', label: 'Services' },
+    { href: '/packages', label: 'Packages' },
+    { href: '/contact',  label: 'Contact' },
+  ],
+  brand = 'STUDIO ZERO',
+} = Astro.props;
+---
+<!-- Button only visible on mobile -->
+<button
+  id="mobileMenuBtn"
+  class="sm:hidden inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-zinc-200 ring-1 ring-zinc-800/70 bg-black hover:bg-zinc-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-500"
+  aria-controls="mobileMenuSheet"
+  aria-expanded="false"
+>
+  <!-- burger icon -->
+  <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" class="shrink-0 fill-zinc-200">
+    <path d="M3 6h18v2H3zM3 11h18v2H3zM3 16h18v2H3z" />
+  </svg>
+  <!-- Menu -->
+</button>
+
+<!-- Overlay + sheet (mounted once) -->
+<div id="mobileMenuOverlay" class="hidden fixed inset-0 z-[70]">
+  <!-- backdrop (clicking this closes) -->
+  <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" data-close></div>
+
+  <!-- sheet panel -->
+  <nav
+    id="mobileMenuSheet"
+    class="absolute left-1/2 top-1/2 z-[71] w-[min(92vw,28rem)] -translate-x-1/2 -translate-y-1/2 rounded-2xl bg-zinc-950 ring-1 ring-zinc-800 shadow-xl"
+    role="dialog" aria-modal="true" aria-label="Mobile Menu"
+  >
+    <!-- header row -->
+    <div class="flex items-center justify-between px-5 py-4 border-b border-zinc-800">
+      <div class="text-sm font-bold tracking-tight text-zinc-400">{brand}</div>
+      <button
+        type="button"
+        class="inline-flex h-9 w-9 items-center justify-center rounded-lg ring-1 ring-zinc-800 text-zinc-300 hover:bg-zinc-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-500"
+        data-close aria-label="Close menu"
+      >
+        <svg width="18" height="18" viewBox="0 0 24 24" class="fill-zinc-300" aria-hidden="true">
+          <path d="M18.3 5.71 12 12l6.3 6.29-1.41 1.41L10.59 13.4 4.29 19.7 2.88 18.3 9.17 12 2.88 5.71 4.29 4.29l6.3 6.3 6.29-6.3z"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- links -->
+    <ul class="py-2">
+      {links.map((l) => (
+        <li>
+          <a
+            href={l.href}
+            class="flex items-center justify-between px-5 py-3 text-base font-medium text-zinc-100 hover:bg-zinc-900/60 border-b border-zinc-900/60 last:border-0"
+            data-link
+            >{l.label}
+            <svg width="16" height="16" viewBox="0 0 24 24" class="ml-3 fill-zinc-400" aria-hidden="true">
+              <path d="M13 5l7 7-7 7-1.41-1.41L16.17 13H4v-2h12.17l-4.58-4.59L13 5z"/>
+            </svg>
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <!-- bottom actions (optional) -->
+    <div class="px-5 pb-5 pt-2 text-xs text-zinc-500">
+      Press <span class="px-1 py-0.5 rounded bg-zinc-900 ring-1 ring-zinc-800">Esc</span> to close
+    </div>
+  </nav>
+</div>
+
+<script is:inline>
+  (() => {
+    const btn = document.getElementById('mobileMenuBtn');
+    const overlay = document.getElementById('mobileMenuOverlay');
+    const sheet = document.getElementById('mobileMenuSheet');
+    if (!btn || !overlay || !sheet) return;
+
+    const open = () => {
+      overlay.classList.remove('hidden');
+      btn.setAttribute('aria-expanded', 'true');
+      document.documentElement.classList.add('overflow-hidden'); // lock scroll
+      // focus first link
+      const firstLink = sheet.querySelector('[data-link]');
+      firstLink && firstLink.focus();
+    };
+
+    const close = () => {
+      overlay.classList.add('hidden');
+      btn.setAttribute('aria-expanded', 'false');
+      document.documentElement.classList.remove('overflow-hidden');
+      btn.focus();
+    };
+
+    btn.addEventListener('click', open);
+
+    // close on overlay click / close buttons / link clicks
+    overlay.addEventListener('click', (e) => {
+      const target = e.target;
+      // anything with data-close or the backdrop itself
+      if (target instanceof HTMLElement && (target.hasAttribute('data-close') || target === overlay)) {
+        close();
+      }
+    });
+    sheet.querySelectorAll('[data-link]').forEach((a) => {
+      a.addEventListener('click', close);
+    });
+
+    // close button(s) inside the sheet
+    sheet.querySelectorAll('[data-close]').forEach((el) => el.addEventListener('click', close));
+
+    // close on ESC
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !overlay.classList.contains('hidden')) close();
+    });
+
+    // stop clicks inside panel from closing via overlay handler
+    sheet.addEventListener('click', (e) => e.stopPropagation());
+
+    // reduce motion: remove blur if user prefers
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      const backdrop = overlay.querySelector('[data-close]');
+      if (backdrop) backdrop.classList.remove('backdrop-blur-sm');
+    }
+  })();
+</script>

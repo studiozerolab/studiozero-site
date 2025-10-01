@@ -205,9 +205,9 @@ html { scroll-behavior: smooth; }
 
 @keyframes noiseDouble {
   0%, 39%  { opacity: 0; }
-  40%      { opacity: .07; }  /* pop 1 */
+  40%      { opacity: .08; }  /* pop 1 */
   41%      { opacity: 0; }
-  42%      { opacity: .10; }  /* pop 2 */
+  42%      { opacity: .04; }  /* pop 2 */
   43%,100% { opacity: 0; }
 }
 
@@ -217,7 +217,7 @@ html { scroll-behavior: smooth; }
   11%, 31%  { opacity: 0; }
   32%       { opacity: .08; }  /* pop */
   33%, 57%  { opacity: 0; }
-  58%       { opacity: .01; }  /* pop */
+  58%       { opacity: .05; }  /* .01 pop */
   59%, 83%  { opacity: 0; }
   84%       { opacity: var(--pop-opacity); }  /* pop */
   85%,100%  { opacity: 0; }
