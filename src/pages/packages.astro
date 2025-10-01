@@ -1,15 +1,33 @@
 ---
 import Base from "../layouts/Base.astro";
-import Footer from '../components/Footer.astro'
-import PricingGrid from "../components/PricingGrid.astro";
+import PromoSplit from '../components/PromoSplit.astro';
+import HowItWorks from '../components/PackagesSteps.astro';
+import CardGrid from "../components/CardGrid.astro";
+import Footer from '../components/Footer.astro';
 import AddOnsList from "../components/AddOnsList.astro";
 
 /* --------------------------- DATA ---------------------------- */
 
+const steps = [
+  {
+    title: 'Pick a Website Build',
+    text: 'Choose a one-time package (Starter, Growth, or Pro) to get your site online.',
+  },
+  {
+    title: 'Choose a Monthly Plan',
+    text: 'Add ongoing support with a Care Plan—Base, Growth, or Pro—depending on how much help you want.',
+  },
+  {
+    title: 'Customize with Add-Ons',
+    text: 'Enhance your package or buy standalone services like email, payments, SEO, and analytics.',
+  },
+];
+
 // One-time website builds
 const WEBSITE_PACKAGES = [
   {
-    tier: "Starter",
+    location: "packagesPage",
+    title: "Starter",
     price: "$450",
     cadence: "one-time",
     points: [
@@ -19,13 +37,15 @@ const WEBSITE_PACKAGES = [
       "1 email account setup (Zoho free/premium)",
       "Static QR code",
     ],
+    ctaStyle: "button", /* text || button */
     ctas: [
-      { label: "Learn More", href: "/services#websites", style: "ghost" },
       { label: "Quick Start", href: "/contact?package=starter", style: "solid" },
+      { label: "Learn More", href: "/services#websites", style: "ghost" },
     ],
   },
   {
-    tier: "Growth",
+    location: "packagesPage",
+    title: "Growth",
     price: "$1,050",
     cadence: "one-time",
     featured: true,
@@ -37,13 +57,14 @@ const WEBSITE_PACKAGES = [
       "Online payments (PayPal, Venmo Business, Stripe)",
       "Branded QR codes + newsletter signup",
     ],
+    ctaStyle: "button", /* text || button */
     ctas: [
       { label: "Learn More", href: "/services#websites", style: "ghost" },
-      { label: "Quick Start", href: "/contact?package=growth", style: "solid" },
     ],
   },
   {
-    tier: "Pro",
+    location: "packagesPage",
+    title: "Pro",
     price: "$2,100",
     cadence: "one-time",
     points: [
@@ -54,9 +75,9 @@ const WEBSITE_PACKAGES = [
       "Advanced payments (Stripe + subscriptions)",
       "Email marketing setup + branded templates",
     ],
+    ctaStyle: "button", /* text || button */
     ctas: [
       { label: "Learn More", href: "/services#websites", style: "ghost" },
-      { label: "Quick Start", href: "/contact?package=pro", style: "solid" },
     ],
   },
 ];
@@ -64,7 +85,8 @@ const WEBSITE_PACKAGES = [
 // Monthly plans
 const MONTHLY_PLANS = [
   {
-    tier: "Base",
+    location: "packagesPage",
+    title: "Base",
     price: "$35",
     cadence: "/mo",
     points: [
@@ -74,13 +96,15 @@ const MONTHLY_PLANS = [
       "Monthly uptime check",
       "Add-ons: Email mgmt, Analytics reports",
     ],
+    ctaStyle: "button", /* text || button */
     ctas: [
-      { label: "Learn More", href: "/services#hosting-email", style: "ghost" },
       { label: "Quick Start", href: "/contact?plan=base", style: "solid" },
+      { label: "Learn More", href: "/services#hosting-email", style: "ghost" },
     ],
   },
   {
-    tier: "Growth",
+    location: "packagesPage",
+    title: "Growth",
     price: "$95",
     cadence: "/mo",
     featured: true,
@@ -91,13 +115,14 @@ const MONTHLY_PLANS = [
       "Priority email support",
       "Add-ons: SEO check-ins, Campaign mgmt",
     ],
+    ctaStyle: "button", /* text || button */
     ctas: [
       { label: "Learn More", href: "/services#analytics-seo", style: "ghost" },
-      { label: "Quick Start", href: "/contact?plan=growth", style: "solid" },
     ],
   },
   {
-    tier: "Pro",
+    location: "packagesPage",
+    title: "Pro",
     price: "$195",
     cadence: "/mo",
     points: [
@@ -107,9 +132,9 @@ const MONTHLY_PLANS = [
       "Custom branded QR codes",
       "Priority turnaround on requests",
     ],
+    ctaStyle: "button", /* text || button */
     ctas: [
       { label: "Learn More", href: "/services#analytics-seo", style: "ghost" },
-      { label: "Quick Start", href: "/contact?plan=pro", style: "solid" },
     ],
   },
 ];
@@ -151,6 +176,7 @@ const ADDONS = [
 ---
 
 <Base title="Packages & Pricing">
+
   <!-- Hero -->
   <section class="wrap section-gap bg-crt-subtle bg-crt-mid section-pad">
     <div class="max-w-4xl mx-auto text-center">
@@ -165,6 +191,33 @@ const ADDONS = [
     </div>
   </section>
 
+  <PromoSplit
+        eyebrow=""
+        title="Clear Packages, No Surprises"
+        ctaHref="/services"
+        ctaLabel="See Our Services →"
+        imageSrc="/stock/stockworker01.jpeg"
+        imageAlt="Small business owner using a laptop at a cafe"
+        imageSide="right"
+        bg="subtle"
+      >
+        Getting online doesn’t have to be complicated.
+         <br /><br />
+         Start with a one-time website build, 
+         add a monthly care plan if you want ongoing support, 
+         and customize with add-ons whenever you’re ready.
+         <br /><br />
+         Straightforward pricing and services that grow with your business.
+      </PromoSplit>
+
+      <HowItWorks
+        title="HOW IT WORKS"
+        steps={steps}
+        bg="subtle"
+        mobileArrows={false}
+      />
+  
+
   <!-- One-time website packages -->
   <section class="wrap section-gap bg-crt-subtle bg-crt-light section-pad">
     <header class="mb-8">
@@ -176,7 +229,7 @@ const ADDONS = [
       </p>
     </header>
 
-    <PricingGrid items={WEBSITE_PACKAGES} />
+    <CardGrid tiers={WEBSITE_PACKAGES}></CardGrid>
   </section>
 
   <!-- Monthly plans -->
@@ -189,7 +242,7 @@ const ADDONS = [
       </p>
     </header>
 
-    <PricingGrid items={MONTHLY_PLANS} monthly />
+    <CardGrid tiers={MONTHLY_PLANS} monthly />
   </section>
 
   <!-- Add-ons -->

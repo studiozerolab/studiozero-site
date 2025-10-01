@@ -1,0 +1,94 @@
+---
+interface Props {
+  eyebrow?: string;                    // small label above the title
+  title: string;
+  html?: string;                       // optional HTML string for body (or use <slot/>)
+  bullets?: string[];                  // OR bullet points
+  ctaHref?: string;
+  ctaLabel?: string;                   // e.g., "See Our Services →"
+  imageSrc: string;
+  imageAlt: string;
+  imageSide?: 'left' | 'right';        // default: 'right'
+  bg?: 'subtle' | 'light' | 'mid' | 'dark'; // section background
+  flatBottom?: boolean;                // square off bottom corners of section
+}
+
+const {
+  eyebrow,
+  title,
+  html,
+  bullets = [],
+  ctaHref,
+  ctaLabel,
+  imageSrc,
+  imageAlt,
+  imageSide = 'right',
+  bg = 'subtle',
+  flatBottom = false,
+} = Astro.props;
+
+const bgClass = `bg-crt-${bg}`;
+const flip = imageSide === 'left';
+---
+
+<section class={`wrap section-pad section-gap ${bgClass} ${flatBottom ? 'flat-bottom' : ''}`}>
+  <div class="wrap">
+    <!-- Grid: stacks on mobile, 2 cols from md+ -->
+    <div class={`grid items-center gap-8 md:gap-12 md:grid-cols-2`}>
+      <!-- TEXT -->
+      <div class={`${flip ? 'md:order-2' : 'md:order-1'}`}>
+        {eyebrow && (
+          <div class="mb-2 text-sm font-medium tracking-wide text-zinc-600">
+            {eyebrow}
+          </div>
+        )}
+        <h2 class="text-3xl sm:text-4xl font-bold tracking-tight text-zinc-900">
+          {title}
+        </h2>
+
+        {html ? (
+          <div class="mt-4 prose prose-zinc max-w-none text-zinc-700" set:html={html} />
+        ) : (
+          <div class="mt-4 text-base text-zinc-700">
+            <slot />
+          </div>
+        )}
+
+        {bullets.length > 0 && (
+          <ul class="mt-4 space-y-2 text-zinc-700">
+            {bullets.map((b) => <li class="pl-5 list-disc">{b}</li>)}
+          </ul>
+        )}
+
+        {ctaHref && ctaLabel && (
+          <div class="mt-6">
+            <a href={ctaHref}
+               class="inline-flex items-center font-medium text-zinc-900 border-b border-zinc-300 hover:border-zinc-500">
+              {ctaLabel}
+            </a>
+          </div>
+        )}
+      </div>
+
+      <!-- IMAGE -->
+      <figure class={`${flip ? 'md:order-1' : 'md:order-2'}`}>
+        <div class="relative rounded-2xl overflow-hidden ring-1 ring-zinc-200 bg-white">
+          <!-- aspect wrapper: remove texture on artwork -->
+          <div class="aspect-[4/3] bg-transparent">
+            <img
+              src={imageSrc}
+              alt={imageAlt}
+              loading="lazy"
+              decoding="async"
+              class="h-full w-full object-cover"
+            />
+          </div>
+        </div>
+        <!-- Optional caption slot -->
+        <figcaption class="sr-only">
+          <slot name="caption" />
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>

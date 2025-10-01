@@ -1,0 +1,82 @@
+---
+interface Step {
+  title: string;
+  text: string;
+  label?: string; // optional override for "Step 1", "Step 2", ...
+}
+
+interface Props {
+  title?: string;                          // defaults to "HOW IT WORKS"
+  steps: Step[];                           // 3 steps typical, but not required
+  bg?: 'subtle' | 'light' | 'mid' | 'dark';
+  flatBottom?: boolean;
+  mobileArrows?: boolean;                  // show small arrows between steps on mobile
+}
+
+const {
+  title = 'HOW IT WORKS',
+  steps,
+  bg = 'subtle',
+  flatBottom = false,
+  mobileArrows = false,
+} = Astro.props;
+
+const bgClass = `bg-crt-${bg}`;
+---
+
+<section class={`wrap section-pad section-gap ${bgClass} ${flatBottom ? 'flat-bottom' : ''}`}>
+  <div class="wrap">
+    <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-zinc-900 mb-6">
+      {title}
+    </h2>
+
+    <!-- Ordered list for accessibility -->
+    <ol class="space-y-6">
+      {steps.map((step, i) => (
+        <li class="group">
+          <!-- Desktop / Tablet: two-column grid -->
+          <div class="hidden md:grid md:grid-cols-[10rem,1fr] md:items-start md:gap-x-8">
+            <div class="text-lg font-semibold text-zinc-500 tracking-wide pt-1">
+              {step.label ?? `Step ${i + 1}`}
+            </div>
+            <div>
+              <h3 class="text-xl font-semibold text-zinc-900">{step.title}</h3>
+              <p class="mt-2 text-zinc-700">
+                {step.text}
+              </p>
+            </div>
+          </div>
+
+          <!-- Mobile: stacked with numbered icon + dividers -->
+          <div class="md:hidden">
+            <div class="flex items-start gap-4">
+              <!-- Numbered icon -->
+              <div class="shrink-0 mt-1 inline-flex h-9 w-9 items-center justify-center rounded-full ring-1 ring-zinc-300 bg-white text-sm font-semibold text-zinc-700">
+                {i + 1}
+              </div>
+              <div class="flex-1">
+                <h3 class="text-lg font-semibold text-zinc-900">{step.title}</h3>
+                <p class="mt-1 text-zinc-700">
+                  {step.text}
+                </p>
+              </div>
+            </div>
+
+            <!-- Faint divider (mobile only) -->
+            {i < steps.length - 1 && (
+              <>
+                {mobileArrows ? (
+                  <div class="my-3 flex items-center justify-center" aria-hidden="true">
+                    <span class="text-zinc-300 text-xl leading-none">↓</span>
+                  </div>
+                ) : (
+                  <div class="my-3 h-px bg-zinc-200"></div>
+                )}
+              </>
+            )}
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>

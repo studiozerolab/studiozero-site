@@ -1,9 +1,9 @@
 ---
 import Base from '../layouts/Base.astro';
 import Hero from '../components/Hero.astro';
+import PromoSplit from '../components/PromoSplit.astro'
 import ServicesPro from '../components/ServicesPro.astro';
 import Packages from '../components/Packages.astro';
-import AddOnsTeaser from '../components/AddOnsTeaser.astro';
 import RecentWork from '../components/RecentWork.astro';
 import Contact from '../components/Contact.astro';
 import Footer from "../components/Footer.astro";
@@ -11,6 +11,22 @@ import Footer from "../components/Footer.astro";
 
 <Base title="Studio Zero">
   <Hero />
+  <PromoSplit
+  eyebrow=""
+  title="WHY STUDIO ZERO?"
+  ctaHref="/services"
+  ctaLabel="See Our Services →"
+  imageSrc="/stock/stockoffice01.jpeg"
+  imageAlt="Small business owner using a laptop at a cafe"
+  imageSide="right"
+  bg="subtle"
+>
+  We build modern, mobile-friendly websites and digital tools designed
+  for small businesses, startups, and local services.
+  <br /><br />
+  From professional email to analytics and payments, we handle the tech
+  so you can focus on running your business.
+</PromoSplit>
   <ServicesPro />
   <Packages />
   <RecentWork />

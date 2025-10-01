@@ -644,7 +644,7 @@ html { scroll-behavior: smooth; }
   align-items: baseline;
   gap: .5rem;
   font-size: .95rem;
-  letter-spacing: .01em;
+  letter-spacing: -0.025em; /* .01 */
 }
 .footer-brand .brand { font-weight: 700; color: #fafafa; }
 .footer-brand .dot { opacity: .45; }

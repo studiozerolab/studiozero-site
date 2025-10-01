@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
-import Footer from '../components/Footer.astro'
+import PromoSplit from '../components/PromoSplit.astro';
+import Footer from '../components/Footer.astro';
 
 // quick helpers for CTAs
 const pkg = '/packages';
@@ -9,34 +10,28 @@ const title = "Services • Studio Zero";
 const descrip = "Websites, hosting & email, analytics & SEO - everything your business needs to get online and grow.";
 ---
 
+  <Base title={title} descrip={descrip}>
 
-  <!-- <head>
-    <title>Services • Studio Zero</title>
-    <meta name="description" content="Websites, hosting & email, analytics & SEO — everything your business needs to get online and grow." />
-  </head> -->
+      <PromoSplit
+        eyebrow=""
+        title="Simple, Flexible Services"
+        ctaHref="/services"
+        ctaLabel="See Our Services →"
+        imageSrc="/stock/pizzatogo.jpeg"
+        imageAlt="Small business owner using a laptop at a cafe"
+        imageSide="right"
+        bg="subtle"
+      >
+        Every business needs the same essentials online: a fast website, 
+        reliable email, and a way for customers to find you.
+         <br /><br />
+         Studio Zero makes those tools simple, affordable, 
+         and tailored to your needs — whether you want a full package or just one service at a time.
+      </PromoSplit>
 
-  <!-- <body class="bg-white text-zinc-900"> -->
-    <!-- <Header /> -->
-
-    <!-- HERO / INTRO (same CRT band style you use for the homepage hero) -->
-
-    <!-- <section class="crt-band section-gap">
-      <div class="wrap">
-        <header class="mb-8">
-          <h1 class="section-header pop">Our Services</h1>
-          <p class="lead text-zinc-400 max-w-3xl">
-            Websites, hosting &amp; email, and analytics &amp; SEO — everything your business needs to get online and grow.
-          </p>
-          <div class="cta-row mt-6">
-            <a href={`${pkg}`} class="btn btn-primary">View Packages</a>
-            <a href={contact} class="btn btn-ghost">Contact Us</a>
-          </div>
-        </header>
-      </div>
-    </section> -->
-    <Base title={title} descrip={descrip}>
     <!-- SECTION 1: WEBSITES -->
     <section id="websites" class="wrap section-gap bg-crt-subtle bg-crt-light section-pad">
+      
       <header class="mb-8">
         <h2 class="section-header pop">Websites</h2>
         <p class="muted max-w-3xl">
@@ -214,6 +209,4 @@ const descrip = "Websites, hosting & email, analytics & SEO - everything your bu
     </section>
 </Base>
 
-    <Footer />
-  <!-- </body> -->
-
+<Footer />

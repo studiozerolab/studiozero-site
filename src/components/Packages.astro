@@ -1,75 +1,100 @@
 ---
-import AddOnsTeaser from '../components/AddOnsTeaser.astro';
+import CardGrid from "../components/CardGrid.astro";
 
 const tiers = [
   {
-    name: "Starter",
+    location: "homePackages",
+    title: "Pop-Up Website",
+    tag: "1 page",
+    price: 250,
+    desc:
+      "A simple, professional website for your event - live for 60 days. Perfect for fundraisers, product launches, weddings, and more.",
+    points: [
+      "1-page site with key event details",
+      "Published and launched FAST",
+      "Custom domain (e.g., myevent.com)",
+      "Choose from prebuilt templates",
+      "Hosted on fast, secure servers",
+    ],
+    ctaStyle: "button", /* text || button */
+    ctas: [ {label: "Quick Start", href: "/contact?package=starter", style: "solid"}, {label: "Get Starter", href: "#contact" }],
+    learnHref: '/packages#starter',
+    quickHref: '/contact?package=starter',
+  },
+  {
+    location: "homePackages",
+    title: "Starter",
     tag: "1–3 pages",
     price: 450,
-    blurb:
+    desc:
       "A clean, fast one-pager or microsite to get you online quickly.",
-    features: [
+    points: [
       "Custom hero + 1–2 sections",
       "Mobile-friendly design",
       "Contact form",
       "Basic SEO setup",
       "2 rounds of edits",
     ],
-    cta: { label: "Get Starter", href: "#contact" },
+    ctaStyle: "button", /* text || button */
+    ctas: [{label: "Quick Start", href: "/contact?package=starter", style: "solid"},{label: "Get Starter", href: "#contact" }],
     learnHref: '/packages#starter',
     quickHref: '/contact?package=starter',
   },
   {
-    name: "Standard",
+    location: "homePackages",
+    title: "Standard",
     tag: "4–7 pages",
     price: 1100,
     featured: false, // boolean
-    blurb:
+    desc:
       "Polished small-business site with room to grow.",
-    features: [
+    points: [
       "Home + Services + Work + Contact",
       "Reusable components",
       "Performance budget & image optimization",
       "CMS-ready structure",
       "3 rounds of edits",
     ],
-    cta: { label: "Start a Project", href: "#contact" },
+    ctaStyle: "button", /* text || button */
+    ctas: [{ label: "Start a Project", href: "#contact" }],
     learnHref: '/packages#growth',   // or #standard if you use that id
     // quickHref: '/contact?package=growth',
   },
   {
-    name: "Pro",
+    location: "homePackages",
+    title: "Pro",
     tag: "custom",
     price: "Custom",
-    blurb:
+    desc:
       "Bespoke design, integrations, or migrations.",
-    features: [
+    points: [
       "Design system & tokens",
       "Blog/Collections or booking",
       "3rd-party integrations",
       "Accessibility pass (WCAG AA)",
       "Ongoing support options",
     ],
-    cta: { label: "Book a Call", href: "#contact" },
+    ctaStyle: "button", /* text || button */
+    ctas: [{ label: "Book a Call", href: "#contact" }],
     learnHref: '/packages#pro',
-    // quickHref: '/contact?package=pro',
   },
   {
-    name: "Add Ons & Stand Alone",
+    location: "homePackages",
+    title: "Add Ons & Stand Alone",
     // tag: "custom",
     price: "Custom",
-    blurb:
+    desc:
       "Enhance any package with extra tools, or purchase on their own.",
-    features: [
+    points: [
       "Professional email setup",
       "Analytics reports & insights",
       "SEO services (Google business Profilem keyword optimization)",
       "Online payments (Stripe, PayPal",
       "QR codes (static or branded)",
     ],
-    cta: { label: "Book a Call", href: "#contact" },
+    ctaStyle: "button", /* text || button */
+    ctas: [{ label: "Book a Call", href: "#contact" }],
     learnHref: '/packages#addons',
-    // quickHref: '/contact?package=pro',
   },
 ];
 ---
@@ -81,9 +106,11 @@ const tiers = [
       Clear, practical options. Every package includes modern performance, responsive design, and friendly support.
     </p>
 
+    <CardGrid tiers={tiers}></CardGrid>
+
     <!-- panel with subtle grid like Services -->
-    <!-- <div class=" rounded-2xl border border-zinc-200 mt-8 p-4 sm:p-6"> //panel-grid  article class=card-->
-      <div class="std-grid std-grid--smart std-grid--fixed">
+
+      <!-- <div class="std-grid std-grid--smart std-grid--fixed">
         {tiers.map((t) => (
           <article
             class={[
@@ -93,16 +120,6 @@ const tiers = [
                 : "border-zinc-200 bg-white",
             ].join(" ")}
           >
-            {/* <div class="card-body">  grow */}
-            {/* <div class="mb-2 mt-0"> || p-6 sm:p-7 */}
-              {/* <div class="flex items-baseline justify-between">  /* items-baseline || gap-2 */}
-                {/* <h3 class="text-xl font-bold text-gray-900 leading-tight">{t.name}</h3>
-                {t.tag &&
-                <span class="inline-flex items-center whitespace-nowrap text-xs px-2 py-0.5 rounded-full bg-zinc-100 text-zinc-700 leading-none">
-                  {t.tag}
-                </span>
-                }
-              </div> */}
               <div class="card-head">
               <h3 class="card-title">{t.name}</h3>
               {t.tag &&
@@ -113,15 +130,10 @@ const tiers = [
               
               </div>
 
-              {/* <div class="mt-3 flex items-end gap-2"> */}
               <div class="card-body">
-                
                 <p class="mt-2 text-2xl font-bold text-gray-900">
                   {typeof t.price === "number" ? `$${t.price}` : t.price}
                 </p>
-                {/* {typeof t.price === "number" && (
-                  <p class="text-sm text-gray-500">flat</p>
-                )} */}
               </div>
 
               <p class="mt-3 text-sm text-zinc-600">{t.blurb}</p>
@@ -136,22 +148,8 @@ const tiers = [
                   </li>
                 ))}
               </ul>
-              {/* <div class="mt-6 flex justify-center">
-              <a
-                href={t.cta.href}
-                class={[
-                  "mt-8 inline-flex  justify-center rounded-lg px-4 py-2 text-sm font-medium transition",
-                  t.featured
-                    ? "bg-black text-white hover:bg-zinc-900"
-                    : "border border-zinc-300 hover:border-zinc-400 text-gray-900"
-                ].join(" ")}
-              >
-                {t.cta.label}
-              </a>
-              </div> */}
-            {/* </div> */}
-            </div>
-            <div class="card-actions"> {/* mt-6 pt-4 flex justify-center gap-3 || mt-6 pt-4 flex flex-wrap items-center gap-3 */}
+
+            <div class="card-actions">
               { t.quickHref &&
             <a href={t.quickHref}
                class="btn btn-black">
@@ -162,17 +160,15 @@ const tiers = [
             class="btn btn-outline">
               Learn More
             </a>
-          {/* </div> */}
+          </div>
           </article>
         ))}
-      </div>
+      </div> -->
 
       <!-- small footnote -->
       <p class="mt-3 text-xs text-zinc-500">
         Prices are typical starting points and may vary based on scope. Transparent proposals—no surprises.
       </p>
-      
-    <!-- </div> -->
      
      <!-- Full packages button -->
     <div class="mt-6">
@@ -180,7 +176,6 @@ const tiers = [
          class="inline-flex items-center gap-1 text-sm text-zinc-600 hover:border-zinc-900">
         See full Packages & Pricing <span aria-hidden>→</span>
       </a>
-      
     </div>
     
   </div>
@@ -188,7 +183,7 @@ const tiers = [
 </section>
 
 <style>
-  /* Reuse your subtle graph paper background */
+  /* Reuse subtle graph paper background */
   .panel-grid {
     position: relative;
     overflow: hidden;
