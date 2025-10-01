@@ -20,10 +20,10 @@ const {
   brand = 'STUDIO ZERO',
 } = Astro.props;
 ---
-<!-- Button only visible on mobile -->
+<!-- Button only visible on mobile   focus-visible:ring-zinc-500-->
 <button
   id="mobileMenuBtn"
-  class="sm:hidden inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-zinc-200 ring-1 ring-zinc-800/70 bg-black hover:bg-zinc-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-500"
+  class="sm:hidden inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-zinc-200 ring-1 ring-zinc-800/70 bg-black hover:bg-zinc-900 focus:outline-none focus-visible:ring-2"
   aria-controls="mobileMenuSheet"
   aria-expanded="false"
 >
@@ -47,7 +47,7 @@ const {
   >
     <!-- header row -->
     <div class="flex items-center justify-between px-5 py-4 border-b border-zinc-800">
-      <div class="text-sm font-bold tracking-tight text-zinc-400">{brand}</div>
+      <div class="text-lg font-bold tracking-tight text-zinc-400">{brand}</div>
       <button
         type="button"
         class="inline-flex h-9 w-9 items-center justify-center rounded-lg ring-1 ring-zinc-800 text-zinc-300 hover:bg-zinc-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-500"
@@ -95,7 +95,7 @@ const {
       btn.setAttribute('aria-expanded', 'true');
       document.documentElement.classList.add('overflow-hidden'); // lock scroll
       // focus first link
-      const firstLink = sheet.querySelector('[data-link]');
+      const firstLink = sheet.querySelector('[data-close]');
       firstLink && firstLink.focus();
     };
 

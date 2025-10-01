@@ -23,7 +23,7 @@ const ctaText = "Get Started";
     <nav aria-label="Primary">
       <ul class="hidden sm:flex items-center gap-6">
         {navLinks.map(({ label, href }) => (
-          <li><a href={href} class="text-sm text-zinc-700 hover:text-black transition">{label}</a></li>
+          <li><a href={href} class="text-sm text-zinc-700">{label}</a></li>
         ))}
         <li>
           <a href="#contact"
@@ -33,7 +33,7 @@ const ctaText = "Get Started";
         </li>
       </ul>
       <!-- Mobile menu button + modal -->
-      <MobileMenu client:load />
+      <MobileMenu />
     </nav>
 
 

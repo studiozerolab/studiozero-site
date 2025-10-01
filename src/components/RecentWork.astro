@@ -2,15 +2,19 @@
 import LaptopAutoFit from "./LaptopAutoFit.astro";
 
 const items = [
-  { title: "Willow Wellness Site", desc: "Simple, modern design that's easy to update", img: "/work/willow.jpg" },
-  { title: "Vertex Brewery Website", desc: "Custom website showcasing brewery offerings", img: "/work/vertex.jpg" },
-  { title: "Jensen Carpentry Page", desc: "Informative, professional landing page", img: "/work/jensen.jpg" },
+  { title: "Restaurant Demo", desc: "Simple, modern design that's easy to update", img: "/work/willow.jpg" },
+  { title: "Contractor Demo", desc: "Custom website showcasing offerings", img: "/work/vertex.jpg" },
+  { title: "Portfolio Demo", desc: "Informative, professional landing page", img: "/work/jensen.jpg" },
 ];
 ---
 
 <section id="work" class="wrap section-gap bg-crt-subtle bg-crt-dark section-pad">
   <div class="wrap">
-  <h2 class="section-header pop">Recent Work</h2>
+  <h2 class="section-header pop">Design Samples</h2>
+
+  <p class="section-descrip">
+      Choose a layout that fits your business - each design is customized with your logo, colors, and content.
+  </p>
 
   <div class="std-grid std-grid--smart std-grid--fixed">
     {items.map((it) => (
@@ -21,5 +25,12 @@ const items = [
       </article>
     ))}
   </div>
+    <div class="mt-6">
+      <a href="/templates"
+         class="inline-flex items-center gap-1 text-sm text-zinc-600 hover:text-zinc-900 underline underline-offset-4 decoration-zinc-300 hover:decoration-zinc-500">
+        See More Templates <span aria-hidden>→</span>
+      </a>
+    </div>
+
   </div>
 </section>

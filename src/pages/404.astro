@@ -1,0 +1,57 @@
+---
+import '../styles/global.css';
+export const prerender = true;
+
+const links = [
+  { href: '/',          label: 'Home',     desc: 'Back to the start' },
+  { href: '/services',  label: 'Services', desc: 'What we do' },
+  { href: '/packages',  label: 'Packages', desc: 'Pricing & options' },
+  { href: '/#contact',   label: 'Contact',  desc: 'Get in touch' },
+];
+---
+
+<!-- Top dark CRT band -->
+<section class="crt-band">
+  <div class="wrap section-pad">
+    <h1 class="section-header section-header--on-dark">404 - Not Found</h1>
+    <div class="heading-rule"></div>
+    <p class="section-descrip on-dark">
+      The page you're looking for isn't here. It may have moved, or never existed.
+    </p>
+
+    <div class="cta-row">
+      <a href="/" class="btn btn-black">&larr; Back to Home</a>
+    </div>
+  </div>
+</section>
+
+<!-- Suggestions on light CRT background -->
+<section class="section-gap bg-crt-subtle flat-bottom">
+  <div class="wrap section-pad">
+    <h2 class="section-header">Try one of these</h2>
+    <div class=""></div>
+    <p class="section-descrip">
+      Here are a few places that definitely exist.
+    </p>
+
+    <div class="cards cards--max">
+      {links.map((link) => (
+        <article class="card">
+          <div class="card-body">
+            <div class="card-head">
+              <h3 class="card-title">{link.label}</h3>
+            </div>
+            <p>{link.desc}</p>
+          </div>
+          <div class="card-actions">
+            <a href={link.href} class="btn btn-outline">Go to {link.label}</a>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <p class="section-descrip" style="margin-block: 1.25rem 0;">
+      Think this is a bug? <a href="mailto:chris@studiozerolab.com" class="inline-cta">Email us</a>
+    </p>
+  </div>
+</section>
