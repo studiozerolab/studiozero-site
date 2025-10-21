@@ -17,18 +17,18 @@ const {
     { href: '/packages', label: 'Packages' },
     { href: '/contact',  label: 'Contact' },
   ],
-  brand = 'STUDIO ZERO',
+  brand = 'STUDIØ',
 } = Astro.props;
 ---
-<!-- Button only visible on mobile   focus-visible:ring-zinc-500-->
+<!-- Button only visible on mobile   focus-visible:ring-zinc-500  hover:bg-zinc-900 ring-zinc-800/70 bg-black-->
 <button
   id="mobileMenuBtn"
-  class="sm:hidden inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-zinc-200 ring-1 ring-zinc-800/70 bg-black hover:bg-zinc-900 focus:outline-none focus-visible:ring-2"
+  class="sm:hidden inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-zinc-200 ring-1 focus:outline-none focus-visible:ring-2"
   aria-controls="mobileMenuSheet"
   aria-expanded="false"
 >
   <!-- burger icon -->
-  <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" class="shrink-0 fill-zinc-200">
+  <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" class="shrink-0 fill-zinc-900 hover:fill-zinc-600">
     <path d="M3 6h18v2H3zM3 11h18v2H3zM3 16h18v2H3z" />
   </svg>
   <!-- Menu -->
