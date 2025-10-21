@@ -1,0 +1,133 @@
+---
+//import BaseLayout from "@/layouts/BaseLayout.astro";
+import Base from "../layouts/Base.astro";
+
+// Replace these with your real demo URLs and intake URL
+const templates = [
+  {
+    name: "Solid",
+    tagline: "Clean & classic layout for service businesses",
+    imageDesktop: "/work/willow.jpg",
+    imageMobile: "/work/willow.jpg",
+    //imageMobile: "/assets/mockups/solid-mobile.jpg",
+    tags: ["Hero", "Features", "Contact"],
+    theme: "Cool Blue",
+    price: "$350",
+    demoUrl: "https://solid.studiozerolab.com",
+    chooseUrl: "/contact?template=solid",
+  },
+  {
+    name: "Angles",
+    tagline: "Bold angled sections with strong contrast",
+    imageDesktop: "/work/willow.jpg",
+    imageMobile: "/work/willow.jpg",
+    tags: ["Hero", "Spotlights", "Contact + Map"],
+    theme: "Warm Neutral",
+    price: "$350",
+    demoUrl: "https://angles.studiozerolab.com",
+    chooseUrl: "/contact?template=angles",
+  },
+  {
+    name: "Minimal",
+    tagline: "Simple typography & generous white space",
+    imageDesktop: "/work/willow.jpg",
+    imageMobile: "/work/willow.jpg",
+    tags: ["Hero", "About", "Contact"],
+    theme: "Light Gray",
+    price: "$350",
+    demoUrl: "https://minimal.studiozerolab.com",
+    chooseUrl: "/contact?template=minimal",
+  },
+];
+---
+
+<Base title="Choose a Template | Studio Zero">
+  <!-- Page hero -->
+  <section class="std-container py-24 text-center">
+    <h1 class="text-4xl font-semibold tracking-tight">Pick a template. Launch fast.</h1>
+    <p class="mt-3 text-lg text-black/70">
+      Simple, modern sites for small businesses. Fixed price. 1-2 week turnaround.
+    </p>
+  </section>
+
+  <!-- Template grid -->
+  <section class="std-container pb-28">
+    <div class="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
+      {templates.map((t) => (
+        <article class="std-card overflow-hidden group transition">
+          <!-- Screenshot area -->
+          <div class="relative aspect-[4/3] overflow-hidden">
+            <img
+              src={t.imageDesktop}
+              alt={`${t.name} template desktop view`}
+              class="h-full w-full object-cover"
+              loading="lazy"
+              decoding="async"
+            />
+            <!-- Inset mobile preview -->
+            <img
+              src={t.imageMobile}
+              alt={`${t.name} template mobile view`}
+              class="absolute bottom-3 right-3 w-20 rounded-lg border border-black/10 shadow-lg group-hover:scale-105 transition"
+              loading="lazy"
+              decoding="async"
+            />
+            <div class="absolute top-3 left-3 rounded-md bg-black/60 px-2 py-1 text-xs text-white">
+              Mobile-friendly
+            </div>
+          </div>
+
+          <!-- Card body -->
+          <div class="p-6 text-center">
+            <h2 class="text-xl font-semibold">{t.name}</h2>
+            <p class="mt-1 text-sm text-black/60">{t.tagline}</p>
+
+            <!-- Feature tags -->
+            <ul class="mt-3 flex flex-wrap justify-center gap-2 text-xs text-black/60">
+              {t.tags.map((tag) => (
+                <li class="rounded-full bg-black/5 px-2 py-1">{tag}</li>
+              ))}
+            </ul>
+
+            <!-- Theme + price -->
+            <p class="mt-4 text-sm font-medium">{t.theme}</p>
+            <p class="mt-1 text-base font-semibold">{t.price}</p>
+
+            <!-- CTAs -->
+            <div class="mt-6 flex w-full justify-center gap-3">
+              <a
+                href={t.demoUrl}
+                target="_blank"
+                class="std-btn std-btn--ghost"
+              >
+                Live Demo
+              </a>
+              <a
+                href={t.chooseUrl}
+                class="std-btn"
+              >
+                Choose This
+              </a>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- Small upsell/footer note -->
+  <section class="std-container pb-20 text-center text-sm text-black/60">
+    <p>
+      Need something unique? Custom designs start at $750.
+      <a href="/contact" class="underline hover:text-black">Get a quote</a>.
+    </p>
+  </section>
+</Base>
+
+<!-- Notes:
+- Uses Studio Zero utility classes: .std-container, .std-card, .std-btn, .std-btn--ghost
+- Spacing follows your rhythm: py-24 for top section, pb-28 for grid block.
+- Colors are neutral and pull from your existing palette; no hard-coded brand colors.
+- Replace image paths with real screenshots stored in /public/assets/mockups/.
+- Append `?src=templates` to demo links if you'd like to track origin.
+-->
