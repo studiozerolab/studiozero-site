@@ -1,7 +1,7 @@
 ---
-//import BaseLayout from "@/layouts/BaseLayout.astro";
 import Base from "../layouts/Base.astro";
 import LaptopAutoFit from "../components/LaptopAutoFit.astro";
+import Footer from '../components/Footer.astro';
 
 // Replace these with your real demo URLs and intake URL
 const templates = [
@@ -44,31 +44,51 @@ const templates = [
 
 <Base title="Choose a Template | Studio Zero">
   <!-- Page hero -->
-  <section class="std-container py-24 text-center">
-    <h1 class="text-4xl font-semibold tracking-tight">Pick a template. Launch fast.</h1>
+  <!-- <section class="std-container py-24 text-center">
+    <h1 class="text-4xl font-semibold text-black/90 tracking-tight">Pick a template. Launch fast.</h1>
     <p class="mt-3 text-lg text-black/70">
-      Simple, modern sites for small businesses. Fixed price. 1-2 week turnaround.
+        Choose from simple, modern designs built for your small business or project.
+        Every template is fully responsive and customized with your colors, logo, and content.
     </p>
+  </section> -->
+
+<!-- Hero -->
+  <section class="wrap section-gap bg-crt-subtle bg-crt-mid section-pad">
+    <div class="max-w-4xl mx-auto text-center">
+      <h1 class="section-header pop">Pick a template. Launch fast.</h1>
+      <p class="mt-3 text-zinc-600">
+        Choose from simple, modern designs built for your small business or project.
+        Every template is fully responsive and customized with your colors, logo, and content.
+      </p>
+      <!-- <div class="mt-6 flex items-center justify-center gap-3">
+        <a href="/contact" class="btn btn-primary">Get Started</a>
+        <a href="/services" class="btn btn-ghost">View Services</a>
+      </div> -->
+    </div>
   </section>
 
+
   <!-- Template grid -->
-   <section id="work" class="wrap section-gap bg-crt-subtle bg-crt-dark section-pad">
+   <section id="work" class="wrap section-gap bg-crt-subtle bg-crt-light section-pad">
   <!-- <section class="std-container pb-28"> -->
     <div class="std-grid std-grid--smart std-grid--fixed">
       {templates.map((t) => (
-        <article class="std-card overflow-hidden group transition">
+        
+        <article class="std-card overflow-hidden group transition rounded-xl border border-zinc-200 bg-white p-5 shadow-sm hover:shadow-md">
           <!-- Screenshot area -->
           
           <div class="relative aspect-[4/3] overflow-hidden">
           <LaptopAutoFit src={t.imageDesktop} class="w-full max-w-520px mx-auto scale-125" />
-            {/* <img
+            
+            {/* <!-- Original screen shot -->
+            <img
               src={t.imageDesktop}
               alt={`${t.name} template desktop view`}
               class="h-full w-full object-cover"
               loading="lazy"
               decoding="async"
-            /> */}
-            <!-- Inset mobile preview -->
+            />
+            <!-- Inset mobile preview --> 
             <img
               src={t.imageMobile}
               alt={`${t.name} template mobile view`}
@@ -76,14 +96,16 @@ const templates = [
               loading="lazy"
               decoding="async"
             />
+            
             <div class="absolute top-3 left-3 rounded-md bg-black/60 px-2 py-1 text-xs text-white">
               Mobile-friendly
             </div>
+            */}
           </div>
 
           <!-- Card body -->
-          <div class="p-6 text-center">
-            <h2 class="text-xl font-semibold text-black/60">{t.name}</h2>
+          <div class="p-2 text-center">
+            <h2 class="text-xl font-semibold text-black/90">{t.name}</h2>
             <p class="mt-1 text-sm text-black/60">{t.tagline}</p>
 
             <!-- Feature tags -->
@@ -94,8 +116,8 @@ const templates = [
             </ul>
 
             <!-- Theme + price -->
-            <p class="mt-4 text-sm font-medium text-black/60">{t.theme}</p>
-            <p class="mt-1 text-base font-semibold text-black/60">{t.price}</p>
+            {/* <p class="mt-4 text-sm font-medium text-black/60">{t.theme}</p> */}
+            <p class="mt-4 text-base font-semibold text-black/60">{t.price}</p>
 
             <!-- CTAs -->
             <div class="mt-6 flex w-full justify-center gap-3 text-black/60">
@@ -128,6 +150,8 @@ const templates = [
     </p>
   </section>
 </Base>
+
+<Footer />
 
 <!-- Notes:
 - Uses Studio Zero utility classes: .std-container, .std-card, .std-btn, .std-btn--ghost
