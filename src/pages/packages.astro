@@ -6,6 +6,8 @@ import CardGrid from "../components/CardGrid.astro";
 import Footer from '../components/Footer.astro';
 import AddOnsList from "../components/AddOnsList.astro";
 
+import imgWorker from "../assets/stockworker01.jpeg";
+
 /* --------------------------- DATA ---------------------------- */
 
 const steps = [
@@ -50,7 +52,7 @@ const WEBSITE_PACKAGES = [
     cadence: "one-time",
     featured: true,
     points: [
-      "3–5 page semi-custom site",
+      "3-5 page semi-custom site",
       "Mobile-friendly + baseline SEO",
       "Hosting setup (client-managed)",
       "Up to 3 email accounts (free/premium)",
@@ -144,33 +146,33 @@ const ADDONS = [
   {
     group: "Email",
     items: [
-      "Setup ($75–150)", "Management ($10–15/account/mo)",
-      "Branded templates ($100–250)", "Campaign mgmt ($50–100/send)",
+      "Setup ($75-150)", "Management ($10-15/account/mo)",
+      "Branded templates ($100-250)", "Campaign mgmt ($50-100/send)",
     ],
   },
   {
     group: "Analytics",
-    items: ["Basic (+$25/mo)", "Growth (+$50–75/mo)", "Pro (future)"],
+    items: ["Basic (+$25/mo)", "Growth (+$50-75/mo)", "Pro (future)"],
   },
   {
     group: "SEO",
     items: [
-      "Google Business Profile setup ($100–200)",
-      "Keyword optimization ($150–300)",
-      "Quarterly check-ins ($75–150)",
+      "Google Business Profile setup ($100-200)",
+      "Keyword optimization ($150-300)",
+      "Quarterly check-ins ($75-150)",
     ],
   },
   {
     group: "Online Payments",
-    items: ["Setup ($100–200)", "Subscriptions/recurring ($150–300)"],
+    items: ["Setup ($100-200)", "Subscriptions/recurring ($150-300)"],
   },
   {
     group: "QR Codes",
-    items: ["Static ($25–50)", "Branded ($50–100)"],
+    items: ["Static ($25-50)", "Branded ($50-100)"],
   },
   {
     group: "Domains & Hosting",
-    items: ["DNS + SSL/security ($50–100)", "Migrations ($100–200)"],
+    items: ["DNS + SSL/security ($50-00)", "Migrations ($100-200)"],
   },
 ];
 ---
@@ -196,7 +198,7 @@ const ADDONS = [
         title="Clear Packages, No Surprises"
         ctaHref="/services"
         ctaLabel="See Our Services →"
-        imageSrc="/stock/stockworker01.jpeg"
+        imageSrc={imgWorker}
         imageAlt="Small business owner using a laptop at a cafe"
         imageSide="right"
         bg="subtle"

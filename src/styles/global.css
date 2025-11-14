@@ -13,6 +13,12 @@ html { scroll-behavior: smooth; }
     --card-min: 18rem;
     --card-ideal: 18.7rem;
     --card-max: 24rem;
+
+    --site-bg-image: image-set(
+      url("/textures/noise.avif") type("image/avif") 1x,
+      url("/textures/noise.webp") type("image/webp") 1x,
+      url("/textures/noise.png")  type("image/png") 1x,
+    );
 }
 @media (max-width: 806px) {
   :root {
@@ -119,7 +125,8 @@ html { scroll-behavior: smooth; }
   inset: 0;
   z-index: 2;                    /* above ::before scanlines */
   pointer-events: none;
-  background-image: url("/textures/noise.png");
+  background-image: var(--site-bg-image);
+  /* background-image: url("/textures/noise.png"); */
   background-size: auto 320px;
   background-repeat: repeat;
   mix-blend-mode: screen;        /* looks best on black */
@@ -133,7 +140,8 @@ html { scroll-behavior: smooth; }
   inset: 0;
   z-index: 2;                  /* above scanlines (::before), below content */
   pointer-events: none;
-  background-image: url("/textures/noise.png");
+  background-image: var(--site-bg-image);
+  /* background-image: url("/textures/noise.png"); */
   background-size: auto 340px;
   background-repeat: repeat;
   mix-blend-mode: screen;      /* looks good on black; try soft-light for subtler */
@@ -516,7 +524,8 @@ html { scroll-behavior: smooth; }
 /* -------- */
 
 .texture-bg {
-  background-image: url("/textures/noise.png"); /* adjust path */
+  background-image: var(--site-bg-image);
+  /* background-image: url("/textures/noise.png"); adjust path */
   background-size: cover;
   background-repeat: repeat;
   background-position: center;
@@ -565,7 +574,8 @@ html { scroll-behavior: smooth; }
   content: "";
   position: absolute;
   inset: 0;
-  background: url("/textures/noise.png");
+  background-image: var(--site-bg-image);
+  /* background: url("/textures/noise.png"); */
   background-size: auto 340px; /* tweak scale */
   opacity: 0.15;
   animation: crtFlicker 6s infinite steps(60,end);
@@ -940,7 +950,8 @@ html { scroll-behavior: smooth; }
 
 /* noise texture (reuse your site texture) */
 .bg-crt-subtle::after {
-  background-image: url("/textures/noise.png");
+  background-image: var(--site-bg-image);
+  /* background-image: url("/textures/noise.png"); */
   background-size: auto 340px;
   background-repeat: repeat;
   opacity: .10;

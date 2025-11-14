@@ -3,6 +3,8 @@ import Base from '../layouts/Base.astro';
 import PromoSplit from '../components/PromoSplit.astro';
 import Footer from '../components/Footer.astro';
 
+import imgTakeOut from "../assets/pizzatogo.jpeg";
+
 // quick helpers for CTAs
 const pkg = '/packages';
 const contact = '/#contact';
@@ -17,7 +19,7 @@ const descrip = "Websites, hosting & email, analytics & SEO - everything your bu
         title="Simple, Flexible Services"
         ctaHref="/services"
         ctaLabel="See Our Services →"
-        imageSrc="/stock/pizzatogo.jpeg"
+        imageSrc={imgTakeOut}
         imageAlt="Small business owner using a laptop at a cafe"
         imageSide="right"
         bg="subtle"
@@ -59,7 +61,7 @@ const descrip = "Websites, hosting & email, analytics & SEO - everything your bu
           <span class="inline-flex items-center whitespace-nowrap text-xs px-2 py-0.5 rounded-full bg-zinc-100 text-zinc-700 leading-none">from $1,050</span>
           </div>
           <p class="card-body">
-            3–5 page semi-custom builds for growing businesses—room for services, work, and a contact funnel.
+            3-5 page semi-custom builds for growing businesses—room for services, work, and a contact funnel.
           </p>
         </article>
 
@@ -111,7 +113,7 @@ const descrip = "Websites, hosting & email, analytics & SEO - everything your bu
             <span class="inline-flex items-center whitespace-nowrap text-xs px-2 py-0.5 rounded-full bg-zinc-100 text-zinc-700 leading-none">plans from $35/mo</span>
           </div>
           <p class="card-body">
-            We’ll configure client-controlled hosting, or provide fully managed hosting so you never worry about uptime, SSL, or updates.
+            We'll configure client-controlled hosting, or provide fully managed hosting so you never worry about uptime, SSL, or updates.
           </p>
         </article>
 
@@ -200,7 +202,7 @@ const descrip = "Websites, hosting & email, analytics & SEO - everything your bu
     <!-- CLOSING CTA -->
     <section class="wrap section-gap">
       <div class="panel-cta">
-        <h2 class="text-2xl font-semibold tracking-tight text-zinc-700">Ready to get started? Let’s build something great together.</h2>
+        <h2 class="text-2xl font-semibold tracking-tight text-zinc-700">Ready to get started? Let's build something great together.</h2>
         <div class="cta-row mt-4">
           <a href={`${pkg}`} class="btn btn-primary">View Packages</a>
           <a href={contact} class="btn btn-ghost">Contact Us</a>

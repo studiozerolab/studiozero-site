@@ -7,6 +7,8 @@ import Packages from '../components/Packages.astro';
 import RecentWork from '../components/RecentWork.astro';
 import Contact from '../components/Contact.astro';
 import Footer from "../components/Footer.astro";
+
+import promoImg from "../assets/stockoffice02.jpeg";
 ---
 
 <Base title="Studio Zero">
@@ -16,7 +18,7 @@ import Footer from "../components/Footer.astro";
   title="Why Studio Zero?"
   ctaHref="/services"
   ctaLabel="See Our Services →"
-  imageSrc="/stock/stockoffice01.jpeg"
+  imageSrc={promoImg}
   imageAlt="Small business owner using a laptop at a cafe"
   imageSide="right"
   bg="subtle"

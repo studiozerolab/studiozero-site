@@ -1,36 +1,83 @@
 ---
 import LaptopAutoFit from "./LaptopAutoFit.astro";
 
+import ssLocal from "../assets/screenShots/restaurantdemo01.png";
+import ssNature from "../assets/screenShots/willow.jpg";
+
 const items = [
-  { title: "Restaurant Demo", desc: "Simple, modern design that's easy to update", img: "/work/willow.jpg" },
-  { title: "Contractor Demo", desc: "Custom website showcasing offerings", img: "/work/vertex.jpg" },
-  { title: "Portfolio Demo", desc: "Informative, professional landing page", img: "/work/jensen.jpg" },
+  {
+    title: "Restaurant Demo",
+    desc: "A clean, modern design for takeout & local dining.",
+    img: ssLocal,
+    demoUrl:
+      "https://template-story-restaurant.netlify.app/?utm_source=sz-demo-section",
+  },
+  {
+    title: "Contractor Demo",
+    desc: "Custom website showcasing offerings",
+    img: ssNature,
+  },
+  {
+    title: "Portfolio Demo",
+    desc: "Informative, professional landing page",
+    img: ssNature,
+    demoUrl:
+      "https://client-willow-wellness.netlify.app/?utm_source=sz-demo-section",
+  },
 ];
 ---
 
-<section id="work" class="wrap section-gap bg-crt-subtle bg-crt-dark section-pad">
+<section
+  id="work"
+  class="wrap section-gap bg-crt-subtle bg-crt-dark section-pad"
+>
   <div class="wrap">
-  <h2 class="section-header pop">Design Samples</h2>
+    <h2 class="section-header pop">Design Samples</h2>
 
-  <p class="section-descrip">
-      Choose a layout that fits your business - each design is customized with your logo, colors, and content.
-  </p>
+    <p class="section-descrip">
+      Choose a layout that fits your business - each design is customized with
+      your logo, colors, and content.
+    </p>
 
-  <div class="std-grid std-grid--smart std-grid--fixed">
-    {items.map((it) => (
-      <article class="rounded-xl border border-zinc-200 bg-white p-5 shadow-sm hover:shadow-md transition">  
-        <LaptopAutoFit src={it.img} class="w-full max-w-520px mx-auto scale-125" /> {/* class="w-full max-w-520px mx-auto scale-125" */}
-          <h3 class="mt-4 text-lg font-semibold text-zinc-900">{it.title}</h3>
-          <p class="mt-1 text-sm text-zinc-600">{it.desc}</p>
-      </article>
-    ))}
-  </div>
+    <div class="std-grid std-grid--smart std-grid--fixed">
+      {
+        items.map((it) => (
+          <article class="rounded-xl border border-zinc-200 bg-white p-5 shadow-sm hover:shadow-md transition">
+            <LaptopAutoFit
+              src={it.img}
+              class="w-full max-w-520px mx-auto scale-125"
+            />{" "}
+            <h3 class="mt-4 text-lg font-semibold text-zinc-900">{it.title}</h3>
+            <p class="mt-1 text-sm text-zinc-600">{it.desc}</p>
+            {it.demoUrl && (
+              <div class="card-actions mt-6 flex w-full justify-center gap-3 text-black/60">
+                <a
+                  href={it.demoUrl}
+                  target="_blank"
+                  rel="noopener"
+                  class="inline-flex items-center gap-1 text-sm font-medium text-zinc-700 hover:text-zinc-900 underline underline-offset-4 decoration-zinc-300 hover:decoration-zinc-500"
+                >
+                  Live Demo <span aria-hidden>→</span>
+                </a>
+                {/* <a
+                href={it.demoUrl}
+                class="std-btn"
+              >
+                Choose This
+              </a> */}
+              </div>
+            )}
+          </article>
+        ))
+      }
+    </div>
     <div class="mt-6">
-      <a href="/templates"
-         class="inline-flex items-center gap-1 text-sm text-zinc-600 hover:text-zinc-900 underline underline-offset-4 decoration-zinc-300 hover:decoration-zinc-500">
+      <a
+        href="/templates"
+        class="inline-flex items-center gap-1 text-sm text-zinc-600 hover:text-zinc-900 underline underline-offset-4 decoration-zinc-300 hover:decoration-zinc-500"
+      >
         See More Templates <span aria-hidden>→</span>
       </a>
     </div>
-
   </div>
 </section>

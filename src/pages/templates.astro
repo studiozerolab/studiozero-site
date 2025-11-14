@@ -3,54 +3,61 @@ import Base from "../layouts/Base.astro";
 import LaptopAutoFit from "../components/LaptopAutoFit.astro";
 import Footer from '../components/Footer.astro';
 
-// Replace these with real demo URLs and intake URL
+import ssLocal from "../assets/screenShots/restaurantdemo01.png";
+import ssAngles from "../assets/screenShots/angles5 1600x1200.png";
+import ssMinimal from "../assets/screenShots/solid 1600x1200.png";
+import ssNature from "../assets/screenShots/willow.jpg";
+
 const templates = [
   {
-    name: "Solid",
-    tagline: "Clean & classic layout for service businesses",
-    imageDesktop: "/work/angles1 1600x1200png.png",
-    imageMobile: "/work/willow.jpg",
+    name: "Local",
+    tagline: "Modern layout for restaurants, pizzerias, cafés, and takeout businesses.",
+    imageDesktop: ssLocal,
+    //imageDesktop: "/work/restaurantdemo01.png",
+    imageMobile: "",
     //imageMobile: "/assets/mockups/solid-mobile.jpg",
-    tags: ["Hero", "Features", "Contact"],
+    tags: ["Hero", "Story", "Map", "Menu Highlights"],
     theme: "Cool Blue",
-    price: "$350",
-    demoUrl: "https://solid.studiozerolab.com",
+    price: "$450",
+    demoUrl: "https://template-story-restaurant.netlify.app/?utm_source=sz-templates-local",
     chooseUrl: "/contact?template=solid",
   },
   {
     name: "Angles",
     tagline: "Bold angled sections with strong contrast",
-    imageDesktop: "/work/angles5 1600x1200.png",
-    imageMobile: "/work/willow.jpg",
+    imageDesktop: ssAngles,
+    imageMobile: "",
     tags: ["Hero", "Spotlights", "Contact + Map"],
     theme: "Warm Neutral",
     price: "$450",
-    demoUrl: "https://solid-angles-cards.netlify.app",
+    demoUrl: "https://solid-angles-cards.netlify.app/?utm_source=sz-templates-angles",
     chooseUrl: "/contact?template=angles",
   },
   {
     name: "Minimal",
-    tagline: "Simple typography & generous white space",
-    imageDesktop: "/work/angles5 1600x1200.png",
-    imageMobile: "/work/willow.jpg",
-    tags: ["Hero", "About", "Contact"],
+    tagline: "Balanced, professional layout. Features a clean hero, spotlight blocks for showcasing services, and a contact form.",
+    imageDesktop: ssMinimal,
+    imageMobile: "",
+    tags: ["Hero", "Spotlights", "Contact"],
     theme: "Light Gray",
     price: "$350",
-    demoUrl: "https://minimal.studiozerolab.com",
+    demoUrl: "https://minimal.studiozerolab.com/?utm_source=sz-templates-minimal",
     chooseUrl: "/contact?template=minimal",
+  },
+  {
+    name: "Nature",
+    tagline: "Simple typography & generous white space",
+    imageDesktop: ssNature,
+    tags: ["Hero", "About", "Contact"],
+    theme: "Light Gray",
+    price: "$450",
+    demoUrl: "https://client-willow-wellness.netlify.app/?utm_source=sz-templates-nature",
+    chooseUrl: "/contact?template=nature",
   },
 ];
 ---
 
 <Base title="Choose a Template | Studio Zero">
-  <!-- Page hero -->
-  <!-- <section class="std-container py-24 text-center">
-    <h1 class="text-4xl font-semibold text-black/90 tracking-tight">Pick a template. Launch fast.</h1>
-    <p class="mt-3 text-lg text-black/70">
-        Choose from simple, modern designs built for your small business or project.
-        Every template is fully responsive and customized with your colors, logo, and content.
-    </p>
-  </section> -->
 
 <!-- Hero -->
   <section class="wrap section-gap bg-crt-subtle bg-crt-mid section-pad">
@@ -60,86 +67,50 @@ const templates = [
         Choose from simple, modern designs built for your small business or project.
         Every design is fully responsive and customized with your colors, logo, and content.
       </p>
-      <!-- <div class="mt-6 flex items-center justify-center gap-3">
-        <a href="/contact" class="btn btn-primary">Get Started</a>
-        <a href="/services" class="btn btn-ghost">View Services</a>
-      </div> -->
     </div>
   </section>
 
+  <section id="work" class="wrap section-gap bg-crt-subtle bg-crt-light section-pad">
+  <div class="std-grid std-grid--smart std-grid--fixed">
+    {templates.map((it) => (
+      <article class="rounded-xl border border-zinc-200 bg-white p-5 shadow-sm hover:shadow-md transition">  
+        <LaptopAutoFit src={it.imageDesktop} class="w-full max-w-520px mx-auto scale-125" /> {/* class="w-full max-w-520px mx-auto scale-125" */}
+          <h2 class="text-center text-xl font-semibold text-black/90">{it.name}</h2>
+          <p class="text-center mt-1 text-sm text-zinc-600">{it.tagline}</p>
+          {/* <p class="mt-1 text-sm text-black/60">{it.tagline}</p> */}
 
-  <!-- Template grid -->
-   <section id="work" class="wrap section-gap bg-crt-subtle bg-crt-light section-pad">
-  <!-- <section class="std-container pb-28"> -->
-    <div class="std-grid std-grid--smart std-grid--fixed">
-      {templates.map((t) => (
-        
-        <article class="std-card overflow-hidden group transition rounded-xl border border-zinc-200 bg-white p-5 shadow-sm hover:shadow-md">
-          <!-- Screenshot area -->
-          
-          <div class="relative aspect-[4/3] overflow-hidden">
-          <LaptopAutoFit src={t.imageDesktop} class="w-full max-w-520px mx-auto scale-125" />
-            
-            {/* <!-- Original screen shot -->
-            <img
-              src={t.imageDesktop}
-              alt={`${t.name} template desktop view`}
-              class="h-full w-full object-cover"
-              loading="lazy"
-              decoding="async"
-            />
-            <!-- Inset mobile preview --> 
-            <img
-              src={t.imageMobile}
-              alt={`${t.name} template mobile view`}
-              class="absolute bottom-3 right-3 w-20 rounded-lg border border-black/10 shadow-lg group-hover:scale-105 transition"
-              loading="lazy"
-              decoding="async"
-            />
-            
-            <div class="absolute top-3 left-3 rounded-md bg-black/60 px-2 py-1 text-xs text-white">
-              Mobile-friendly
-            </div>
-            */}
-          </div>
-
-          <!-- Card body -->
-          <div class="p-2 text-center">
-            <h2 class="text-xl font-semibold text-black/90">{t.name}</h2>
-            <p class="mt-1 text-sm text-black/60">{t.tagline}</p>
-
-            <!-- Feature tags -->
+          <!-- Feature tags -->
             <ul class="mt-3 flex flex-wrap justify-center gap-2 text-xs text-black/60">
-              {t.tags.map((tag) => (
+              {it.tags.map((tag) => (
                 <li class="rounded-full bg-black/5 px-2 py-1">{tag}</li>
               ))}
             </ul>
 
             <!-- Theme + price -->
             {/* <p class="mt-4 text-sm font-medium text-black/60">{t.theme}</p> */}
-            <p class="mt-4 text-base font-semibold text-black/60">{t.price}</p>
+            <p class="text-center mt-4 text-base font-semibold text-black/60">{it.price}</p>
 
             <!-- CTAs -->
-            <div class="mt-6 flex w-full justify-center gap-3 text-black/60">
+          <div class="card-actions mt-6 flex w-full justify-center gap-3 text-black/60">
               <a
-                href={t.demoUrl}
+                href={it.demoUrl}
+                rel="noopener"
                 target="_blank"
-                class="std-btn std-btn--ghost"
+                class="btn btn-black"
               >
                 Live Demo
               </a>
               <a
-                href={t.chooseUrl}
-                class="std-btn"
+                href={it.demoUrl}
+                class="btn btn-outline"
               >
                 Choose This
               </a>
             </div>
-          </div>
-        </article>
-      ))}
-    </div>
-  <!-- </section> -->
+
+      </article>
+    ))}
+  </div>
   </section>
 
   <!-- Small upsell/footer note -->

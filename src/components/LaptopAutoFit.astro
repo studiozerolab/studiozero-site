@@ -5,13 +5,7 @@
  * Uses your measured frame/screen values (from your file).
  */
 
-interface Props {
-  src: string;                 // screenshot (e.g. "/work/willow.jpg")
-  frame?: string;              // frame path (default: "/mockups/laptop-frame.png")
-  class?: string;              // width control from parent, e.g. "w-full max-w-[520px] mx-auto"
-  fit?: "cover" | "contain";   // how the screenshot scales (default "cover")
-  radius?: string;             // screen corner radius (CSS), e.g. "10px"
-}
+import { Image } from "astro:assets";
 
 const {
   src,
@@ -27,9 +21,9 @@ const FRAME_W = 1600;
 const FRAME_H = 1200;
 
 /* Screen rect as % (derived from 408,317,793,515) */
-const leftPct   = 25.5;
-const topPct    = 26.4167;
-const widthPct  = 49.5625;
+const leftPct = 25.5;
+const topPct = 26.4167;
+const widthPct = 49.5625;
 const heightPct = 42.9167;
 
 const screenStyle =
@@ -38,16 +32,23 @@ const screenStyle =
 ---
 
 <!-- Aspect-ratio wrapper keeps the correct height at any width -->
-<div class={`relative ${className} z-20 bg-transparent`} style={`aspect-ratio:${FRAME_W}/${FRAME_H};`}>
+<div
+  class={`relative ${className} z-20 bg-transparent`}
+  style={`aspect-ratio:${FRAME_W}/${FRAME_H};`}
+>
   <!-- Screenshot: positioned exactly in the screen rectangle -->
-  <img
+
+  <Image
     src={src}
-    alt=""
-    class="absolute"
-    style={screenStyle}
+    alt={""}
     loading="lazy"
     decoding="async"
-    onerror="this.style.display='none'"
+    class="absolute"
+    width="1167"
+    height="570"
+    widths={[360, 520, 720]}
+    quality={75}
+    style={screenStyle}
   />
 
   <!-- Laptop frame on top -->
